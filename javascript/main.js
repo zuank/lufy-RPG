@@ -1,0 +1,120 @@
+//
+//  main.js
+//  <project>
+//
+//  Created by Yuehao Wang on 2016-10-10.
+//  Copyright 2016 Yuehao Wang. All rights reserved.
+//
+
+//初始化项目  刷新频率 节点 长 宽 callback
+LInit(50, "mylegend", 800, 480, main);
+//图片path数组
+var imgData = [{
+	name: "map",
+	path: "./images/map.jpg"
+}, {
+	name: "mingren",
+	path: "./images/mingren.png"
+}, {
+	name: "m",
+	path: "./images/m.jpg"
+}, {
+	name: "e1",
+	path: "./images/e1.png"
+}, {
+	name: "e2",
+	path: "./images/e2.png"
+}];
+
+//预加载完成的图片数组
+var imgList = {};
+//地图块
+var mapImagesArray = null;
+//加载动画类型
+var loadingLayer;
+//游戏层
+var layers = {
+	back:null,
+	mapview:null,
+	chara:null,
+	effect:null,
+	talk:null,
+	control:null
+}
+
+function main() {
+	//准备读取图片
+	loadingLayer = new LoadingSample2();
+	addChild(loadingLayer);
+	LLoadManage.load(
+		imgData,
+		function(progress) {
+			console.log(progress);
+			loadingLayer.setProgress(progress)
+		},
+		gameInit
+	);
+}
+
+//游戏初始化
+function gameInit(result){
+	imgList = result;
+	//游戏层显示初始化
+	layerInit();
+	//添加地图
+	addMap();
+}
+
+//地图初始化
+function addMap(){
+	var bitMapData = null,bitMap = null;
+	var imgCellWidth = 0, imgCellHeight = 0;
+
+	var index, indexX, indexY;
+	//地图图片数组
+	var map = [
+		[18,18,18,18,18,18,18,18,18,18,18,18,55,55,18],
+		[18,18,18,17,17,17,17,17,17,17,17,17,55,55,18],
+		[18,18,17,17,17,17,18,18,17,17,17,17,55,55,18],
+		[18,17,17,17,18,18,18,18,18,17,17,55,55,17,18],
+		[18,17,17,18,22,23,23,23,24,18,17,55,55,17,18],
+		[18,17,17,18,25,28,26,79,27,18,55,55,17,17,18],
+		[18,17,17,17,17,10,11,12,18,18,55,55,17,17,18],
+		[18,18,17,17,10,16,16,16,11,55,55,17,17,17,18],
+		[18,18,17,17,77,16,16,16,16,21,21,17,17,17,18],
+		[18,18,18,18,18,18,18,18,18,55,55,18,18,18,18]
+	];
+	bitMapData = new LBitmapData(imgList["map"]);
+	mapImagesArray = LGlobal.divideCoordinate(bitMapData.image.width, bitMapData.image.height, 10, 10);
+	imgCellWidth = bitMapData.image.width / 10;
+	imgCellHeight = bitMapData.image.height / 10;
+
+	for( var i = 0; i < 10; i++){
+		for (var j = 0; j < 15; j++){
+			index = map[i][j];
+			indexY = Math.floor(index / 10);
+			indexX = index % 10;
+			console.log(indexY);
+			bitMapData = new LBitmapData(imgList["map"], indexX * imgCellWidth, indexY * imgCellHeight, imgCellWidth, imgCellHeight);
+			bitMap = new LBitmap(bitMapData);
+			bitMap.x = j * imgCellWidth;
+			bitMap.y = i * imgCellHeight;
+			console.log(bitMap);
+			layers.mapview.addChild(bitMap);
+		}
+	}
+}
+function layerInit(){
+	layers.back = new LSprite();
+	addChild(layers.back);
+	layers.mapview = new LSprite();
+	addChild(layers.mapview);
+	layers.talk = new LSprite();
+	addChild(layers.talk);
+	layers.control = new LSprite();
+	addChild(layers.control);
+	layers.chara = new LSprite();
+	addChild(layers.chara);
+	layers.effect = new LSprite();
+	addChild(layers.effect);
+}
