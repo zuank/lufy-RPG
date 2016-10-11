@@ -10,6 +10,10 @@
 LInit(50, "mylegend", 800, 480, main);
 //图片path数组
 var imgData = [{
+	type:"js",
+	path:"./javascript/character.js"
+},
+{
 	name: "map",
 	path: "./images/map.jpg"
 }, {
@@ -24,6 +28,9 @@ var imgData = [{
 }, {
 	name: "e2",
 	path: "./images/e2.png"
+}, {
+	name: "p0",
+	path: "./images/p0.png"
 }];
 
 //预加载完成的图片数组
@@ -44,12 +51,11 @@ var layers = {
 
 function main() {
 	//准备读取图片
-	loadingLayer = new LoadingSample2();
+	loadingLayer = new LoadingSample3();
 	addChild(loadingLayer);
 	LLoadManage.load(
 		imgData,
 		function(progress) {
-			console.log(progress);
 			loadingLayer.setProgress(progress)
 		},
 		gameInit
@@ -58,14 +64,18 @@ function main() {
 
 //游戏初始化
 function gameInit(result){
+	removeChild(loadingLayer);
+	loadingLayer = null;
 	imgList = result;
 	//游戏层显示初始化
 	layerInit();
 	//添加地图
 	addMap();
+	//添加人物
+	addChara();
 }
 
-//地图初始化
+//添加地图
 function addMap(){
 	var bitMapData = null,bitMap = null;
 	var imgCellWidth = 0, imgCellHeight = 0;
@@ -94,15 +104,26 @@ function addMap(){
 			index = map[i][j];
 			indexY = Math.floor(index / 10);
 			indexX = index % 10;
-			console.log(indexY);
 			bitMapData = new LBitmapData(imgList["map"], indexX * imgCellWidth, indexY * imgCellHeight, imgCellWidth, imgCellHeight);
 			bitMap = new LBitmap(bitMapData);
 			bitMap.x = j * imgCellWidth;
 			bitMap.y = i * imgCellHeight;
-			console.log(bitMap);
 			layers.mapview.addChild(bitMap);
 		}
 	}
+}
+//添加人物
+function addChara(){
+	var bitMapData = new LBitmapData(imgList["p0"]);
+	var charaWidth = bitMapData.image.width,
+		charaHeight = bitMapData.image.height;
+	var listChara = LGlobal.divideCoordinate(charaWidth, charaHeight, 4, 4);
+	var player = new LAnimationTimeline(bitMapData, listChara);
+	console.log(player);
+	console.log(listChara);
+	player.x = 100;
+	player.y = 100;
+	layers.chara.addChild(player);
 }
 function layerInit(){
 	layers.back = new LSprite();
