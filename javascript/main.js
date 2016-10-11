@@ -120,7 +120,7 @@ function addChara(){
 	var listChara = LGlobal.divideCoordinate(charaWidth, charaHeight, 4, 4);
 	var player = new LAnimationTimeline(bitMapData, listChara);
 	console.log(player);
-	console.log(listChara);
+	player.speed = 3;
 	player.x = 100;
 	player.y = 100;
 	layers.chara.addChild(player);
