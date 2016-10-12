@@ -10,31 +10,14 @@
 LInit(50, "mylegend", 800, 480, main);
 //图片path数组
 var imgData = [{
-	type:"js",
-	path:"./javascript/gameData.js"
-},
-{
-	type:"js",
-	path:"./javascript/character.js"
-},
-{
-	name: "map",
-	path: "./images/map.jpg"
+	type: "js",
+	path: "./javascript/gameData.js"
 }, {
-	name: "mingren",
-	path: "./images/mingren.png"
+	type: "js",
+	path: "./javascript/character.js"
 }, {
-	name: "m",
-	path: "./images/m.jpg"
-}, {
-	name: "e1",
-	path: "./images/e1.png"
-}, {
-	name: "e2",
-	path: "./images/e2.png"
-}, {
-	name: "p0",
-	path: "./images/p0.png"
+	name:"wall01",
+	path:"./images/Event01-Wall01.png"
 }];
 
 //预加载完成的图片数组
@@ -45,15 +28,16 @@ var mapImagesArray = null;
 var loadingLayer;
 //游戏层
 var layers = {
-	back:null,
-	mapview:null,
-	chara:null,
-	effect:null,
-	talk:null,
-	control:null
-}
-//地图块大小
-var imgCellWidth = 0, imgCellHeight = 0;
+		back: null,
+		mapview: null,
+		chara: null,
+		effect: null,
+		talk: null,
+		control: null
+	}
+	//地图块大小
+var imgCellWidth = 0,
+	imgCellHeight = 0;
 
 //当前场景地图
 var nowMapList = null;
@@ -72,7 +56,7 @@ function main() {
 }
 
 //游戏初始化
-function gameInit(result){
+function gameInit(result) {
 	removeChild(loadingLayer);
 	loadingLayer = null;
 	imgList = result;
@@ -85,27 +69,30 @@ function gameInit(result){
 
 function gameBegin() {
 	//添加地图
-	addMap(nowMapList);
+	addMap(nowMapList, 4,4);
 	//添加人物
-	addChara("p0","hero",{x:64,y:64});
+//	addChara();
 }
 
 //添加地图
-function addMap(map){
-	var bitMapData = null,bitMap = null;
-	var index, indexX, indexY;
+function addMap(mapList,imgcol,imgrow) {
+	var bitMapData = null,
+		bitMap = null;
+	var index, indexX, indexY,tempI,tempJ;
 	//地图图片数组
-	bitMapData = new LBitmapData(imgList["map"]);
-	mapImagesArray = LGlobal.divideCoordinate(bitMapData.image.width, bitMapData.image.height, 10, 10);
-	imgCellWidth = bitMapData.image.width / 10;
-	imgCellHeight = bitMapData.image.height / 10;
-
-	for( var i = 0; i < 10; i++){
-		for (var j = 0; j < 15; j++){
-			index = map[i][j];
+	bitMapData = new LBitmapData(imgList["wall01"]);
+	mapImagesArray = LGlobal.divideCoordinate(bitMapData.image.width, bitMapData.image.height, imgcol, imgrow);
+	imgCellWidth = bitMapData.image.width / imgcol;
+	imgCellHeight = bitMapData.image.height / imgrow;
+	
+	tempI = mapList.length;
+	for(var i = 0; i < tempI; i++) {
+		tempJ = mapList[i].length;
+		for(var j = 0; j < tempJ; j++) {
+			index = mapList[i][j];
 			indexY = Math.floor(index / 10);
-			indexX = index % 10;
-			bitMapData = new LBitmapData(imgList["map"], indexX * imgCellWidth, indexY * imgCellHeight, imgCellWidth, imgCellHeight);
+			indexX = index % 10; 
+			bitMapData = new LBitmapData(imgList["wall01"], indexX * imgCellWidth, indexY * imgCellHeight, imgCellWidth, imgCellHeight);
 			bitMap = new LBitmap(bitMapData);
 			bitMap.x = j * imgCellWidth;
 			bitMap.y = i * imgCellHeight;
@@ -114,7 +101,7 @@ function addMap(map){
 	}
 };
 //添加人物
-function addChara(mapData, charaType, charaPosition){
+function addChara(mapData, charaType, charaPosition) {
 	var bitMapData = new LBitmapData(imgList[mapData]);
 	console.log(bitMapData);
 	var charaWidth = bitMapData.image.width,
@@ -127,7 +114,7 @@ function addChara(mapData, charaType, charaPosition){
 	layers.chara.addChild(chara);
 };
 
-function layerInit(){
+function layerInit() {
 	layers.back = new LSprite();
 	addChild(layers.back);
 	layers.mapview = new LSprite();
