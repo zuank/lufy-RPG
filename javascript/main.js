@@ -11,6 +11,10 @@ LInit(50, "mylegend", 800, 480, main);
 //图片path数组
 var imgData = [{
 	type:"js",
+	path:"./javascript/gameData.js"
+},
+{
+	type:"js",
 	path:"./javascript/character.js"
 },
 {
@@ -48,6 +52,11 @@ var layers = {
 	talk:null,
 	control:null
 }
+//地图块大小
+var imgCellWidth = 0, imgCellHeight = 0;
+
+//当前场景地图
+var nowMapList = null;
 
 function main() {
 	//准备读取图片
@@ -67,33 +76,25 @@ function gameInit(result){
 	removeChild(loadingLayer);
 	loadingLayer = null;
 	imgList = result;
+	nowMapList = globalData.map[0];
 	//游戏层显示初始化
 	layerInit();
+	//游戏场景载入
+	gameBegin();
+}
+
+function gameBegin() {
 	//添加地图
-	addMap();
+	addMap(nowMapList);
 	//添加人物
-	addChara();
+	addChara("p0","hero",{x:64,y:64});
 }
 
 //添加地图
-function addMap(){
+function addMap(map){
 	var bitMapData = null,bitMap = null;
-	var imgCellWidth = 0, imgCellHeight = 0;
-
 	var index, indexX, indexY;
 	//地图图片数组
-	var map = [
-		[18,18,18,18,18,18,18,18,18,18,18,18,55,55,18],
-		[18,18,18,17,17,17,17,17,17,17,17,17,55,55,18],
-		[18,18,17,17,17,17,18,18,17,17,17,17,55,55,18],
-		[18,17,17,17,18,18,18,18,18,17,17,55,55,17,18],
-		[18,17,17,18,22,23,23,23,24,18,17,55,55,17,18],
-		[18,17,17,18,25,28,26,79,27,18,55,55,17,17,18],
-		[18,17,17,17,17,10,11,12,18,18,55,55,17,17,18],
-		[18,18,17,17,10,16,16,16,11,55,55,17,17,17,18],
-		[18,18,17,17,77,16,16,16,16,21,21,17,17,17,18],
-		[18,18,18,18,18,18,18,18,18,55,55,18,18,18,18]
-	];
 	bitMapData = new LBitmapData(imgList["map"]);
 	mapImagesArray = LGlobal.divideCoordinate(bitMapData.image.width, bitMapData.image.height, 10, 10);
 	imgCellWidth = bitMapData.image.width / 10;
@@ -113,17 +114,17 @@ function addMap(){
 	}
 };
 //添加人物
-function addChara(){
-	var bitMapData = new LBitmapData(imgList["p0"]);
+function addChara(mapData, charaType, charaPosition){
+	var bitMapData = new LBitmapData(imgList[mapData]);
+	console.log(bitMapData);
 	var charaWidth = bitMapData.image.width,
 		charaHeight = bitMapData.image.height;
 	var listChara = LGlobal.divideCoordinate(charaWidth, charaHeight, 4, 4);
-	var player = new LAnimationTimeline(bitMapData, listChara);
-	console.log(player);
-	player.speed = 3;
-	player.x = 100;
-	player.y = 100;
-	layers.chara.addChild(player);
+	var chara = new LAnimationTimeline(bitMapData, listChara);
+	chara.speed = 3;
+	chara.x = charaPosition.x;
+	chara.y = charaPosition.y;
+	layers.chara.addChild(chara);
 };
 
 function layerInit(){
