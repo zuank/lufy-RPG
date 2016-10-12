@@ -111,7 +111,7 @@ function addMap(){
 			layers.mapview.addChild(bitMap);
 		}
 	}
-}
+};
 //添加人物
 function addChara(){
 	var bitMapData = new LBitmapData(imgList["p0"]);
@@ -124,18 +124,19 @@ function addChara(){
 	player.x = 100;
 	player.y = 100;
 	layers.chara.addChild(player);
-}
+};
+
 function layerInit(){
 	layers.back = new LSprite();
 	addChild(layers.back);
 	layers.mapview = new LSprite();
-	addChild(layers.mapview);
+	layers.back.addChild(layers.mapview);
 	layers.talk = new LSprite();
-	addChild(layers.talk);
+	layers.back.addChild(layers.talk);
 	layers.control = new LSprite();
-	addChild(layers.control);
+	layers.back.addChild(layers.control);
 	layers.chara = new LSprite();
-	addChild(layers.chara);
+	layers.back.addChild(layers.chara);
 	layers.effect = new LSprite();
-	addChild(layers.effect);
+	layers.back.addChild(layers.effect);
 }
