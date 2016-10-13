@@ -17,13 +17,13 @@ var imgData = [{
 	path: "./javascript/event.js"
 }, {
 	name:"wall01",
-	path:"./images/Event01-Wall01.png"
+	path:"./images/wall01.png"
 },{
 	name:"hero",
-	path:"./images/Actor01-Braver01.png"
+	path:"./images/hero.png"
 },{
-	name:"npc01",
-	path:"./images/Actor02-Monster01.png"
+	name:"monster01",
+	path:"./images/monster01.png"
 }];
 
 //预加载完成的图片数组
@@ -45,8 +45,10 @@ var layers = {
 var imgCellWidth = 0,
 	imgCellHeight = 0;
 
-//当前场景地图
-var senceData = null,playerInfo;
+//当前场景
+var senceData = null;
+//hero
+var player = null;
 
 function main() {
 	//准备读取图片
@@ -66,7 +68,7 @@ function gameInit(result) {
 	removeChild(loadingLayer);
 	loadingLayer = null;
 	imgList = result;
-	senceData = globalData[0];
+	senceData = globalData.data[0];
 	//游戏层显示初始化
 	layerInit();
 	//游戏场景载入
@@ -77,33 +79,32 @@ function gameInit(result) {
 
 function gameBegin() {
 	//添加地图
-	addMap(senceData.map, 4,4);
+	addMap("wall01",senceData.map, 4,4);
 	//添加人物
 	for(var i = 0; i < senceData.character.length; i++){
 		addChara(senceData.character[i]);
 	}
-	// addChara();
 }
 
 //添加地图
-function addMap(mapList,imgcol,imgrow) {
+function addMap(mapName,mapList,imgcol,imgrow) {
 	var bitMapData = null,
 		bitMap = null;
-	var index, indexX, indexY,tempI,tempJ;
+	var index, indexX, indexY;
 	//地图图片数组
-	bitMapData = new LBitmapData(imgList["wall01"]);
+	bitMapData = new LBitmapData(imgList[mapName]);
 	mapImagesArray = LGlobal.divideCoordinate(bitMapData.image.width, bitMapData.image.height, imgcol, imgrow);
 	imgCellWidth = bitMapData.image.width / imgcol;
 	imgCellHeight = bitMapData.image.height / imgrow;
 	
-	tempI = mapList.length;
-	for(var i = 0; i < tempI; i++) {
-		tempJ = mapList[i].length;
-		for(var j = 0; j < tempJ; j++) {
+	globalData.mapRow = mapList.length;
+	globalData.mapCol = mapList[0].length;
+	for(var i = 0; i < globalData.mapRow; i++) {
+		for(var j = 0; j < globalData.mapCol; j++) {
 			index = mapList[i][j];
 			indexY = Math.floor(index / 10);
 			indexX = index % 10; 
-			bitMapData = new LBitmapData(imgList["wall01"], indexX * imgCellWidth, indexY * imgCellHeight, imgCellWidth, imgCellHeight);
+			bitMapData = new LBitmapData(imgList[mapName], indexX * imgCellWidth, indexY * imgCellHeight, imgCellWidth, imgCellHeight);
 			bitMap = new LBitmap(bitMapData);
 			bitMap.x = j * imgCellWidth;
 			bitMap.y = i * imgCellHeight;
@@ -112,7 +113,6 @@ function addMap(mapList,imgcol,imgrow) {
 	}
 };
 //添加人物
-var player = null;
 function addChara(character) {
 	var bitMapData = new LBitmapData(imgList[character.name]);
 	var charaWidth = bitMapData.image.width,
@@ -128,7 +128,9 @@ function addChara(character) {
 		player.setLabel("ArrowUp",3,0,1,true);
 		player.setLabel("ArrowRight",1,0,1,true);
 		player.setLabel("ArrowDown",0,0,1,true);
-		playerInfo = character;
+		player.speed =10;
+		player.gotoAndPlay(character.status); 
+		globalData.playerInfo = character;
 	}
 	layers.chara.addChild(chara);
 };
