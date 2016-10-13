@@ -14,10 +14,16 @@ var imgData = [{
 	path: "./javascript/gameData.js"
 }, {
 	type: "js",
-	path: "./javascript/character.js"
+	path: "./javascript/event.js"
 }, {
 	name:"wall01",
 	path:"./images/Event01-Wall01.png"
+},{
+	name:"hero",
+	path:"./images/Actor01-Braver01.png"
+},{
+	name:"npc01",
+	path:"./images/Actor02-Monster01.png"
 }];
 
 //预加载完成的图片数组
@@ -34,13 +40,13 @@ var layers = {
 		effect: null,
 		talk: null,
 		control: null
-	}
+	};
 	//地图块大小
 var imgCellWidth = 0,
 	imgCellHeight = 0;
 
 //当前场景地图
-var nowMapList = null;
+var senceData = null,playerInfo;
 
 function main() {
 	//准备读取图片
@@ -60,18 +66,23 @@ function gameInit(result) {
 	removeChild(loadingLayer);
 	loadingLayer = null;
 	imgList = result;
-	nowMapList = globalData.map[0];
+	senceData = globalData[0];
 	//游戏层显示初始化
 	layerInit();
 	//游戏场景载入
-	gameBegin();
+	gameBegin(); 
+
+	LEvent.addEventListener(window,LKeyboardEvent.KEY_DOWN, playerEvent);
 }
 
 function gameBegin() {
 	//添加地图
-	addMap(nowMapList, 4,4);
+	addMap(senceData.map, 4,4);
 	//添加人物
-//	addChara();
+	for(var i = 0; i < senceData.character.length; i++){
+		addChara(senceData.character[i]);
+	}
+	// addChara();
 }
 
 //添加地图
@@ -101,16 +112,24 @@ function addMap(mapList,imgcol,imgrow) {
 	}
 };
 //添加人物
-function addChara(mapData, charaType, charaPosition) {
-	var bitMapData = new LBitmapData(imgList[mapData]);
-	console.log(bitMapData);
+var player = null;
+function addChara(character) {
+	var bitMapData = new LBitmapData(imgList[character.name]);
 	var charaWidth = bitMapData.image.width,
 		charaHeight = bitMapData.image.height;
 	var listChara = LGlobal.divideCoordinate(charaWidth, charaHeight, 4, 4);
 	var chara = new LAnimationTimeline(bitMapData, listChara);
 	chara.speed = 3;
-	chara.x = charaPosition.x;
-	chara.y = charaPosition.y;
+	chara.x = character.position.x * imgCellWidth;
+	chara.y = character.position.y * imgCellHeight;
+	if(character.type === "hero"){
+		player = chara;
+		player.setLabel("ArrowLeft",2,0,1,true);
+		player.setLabel("ArrowUp",3,0,1,true);
+		player.setLabel("ArrowRight",1,0,1,true);
+		player.setLabel("ArrowDown",0,0,1,true);
+		playerInfo = character;
+	}
 	layers.chara.addChild(chara);
 };
 
