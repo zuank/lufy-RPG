@@ -46,10 +46,9 @@ function canMove(x, y) {
                 var Chara = senceData.character[i];
                 switch (Chara.type){
                     case "npc":
-                        break;
+                        return false;
                     case "monster":
-                        break;
-
+                        return true;
                 }
             }
         }

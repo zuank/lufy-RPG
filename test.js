@@ -1,15 +1,6 @@
-function test(a) {
-    if(a==1){
-        return false;
-    };
-    if(a==2){
-        return 1;
-    }
-    return b();
-    function b(){
-        a=10;
-        return 19; 
-    }
+var a={
+    b:4
 }
-console.log(test(6));
-// test(6);
+var c=a;
+a.b = 10;
+console.log(c.b);

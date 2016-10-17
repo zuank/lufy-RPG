@@ -78,6 +78,7 @@ function gameInit(result) {
 }
 
 function gameBegin() {
+	layers.chara.removeAllChild();
 	//添加地图
 	addMap("wall01",senceData.map, 4,4);
 	//添加人物
@@ -114,6 +115,9 @@ function addMap(mapName,mapList,imgcol,imgrow) {
 };
 //添加人物
 function addChara(character) {
+	if(character.show === false){
+		return false;
+	}
 	var bitMapData = new LBitmapData(imgList[character.name]);
 	var charaWidth = bitMapData.image.width,
 		charaHeight = bitMapData.image.height;

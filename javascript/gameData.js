@@ -19,6 +19,7 @@ var globalData = {
             {
                 name: "monster01",
                 type: "monster",
+                show: true,
                 position: 
                 {
                     x: 1,
@@ -28,6 +29,7 @@ var globalData = {
             {
                 name: "hero",
                 type: "hero",
+                show: true,
                 position: {
                     x: 5,
                     y: 10
