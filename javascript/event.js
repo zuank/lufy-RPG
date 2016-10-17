@@ -38,29 +38,27 @@ function canMove(x, y) {
         return false;
     }
     //碰撞npc
-    return collideCharacter();
-
-    function collideCharacter() {
-        for (var i = 0, j = 0; i < senceData.character.length; i++) {
-            if (senceData.character[i].show) {
-                j++;
-            }
-            if (tempX == senceData.character[i].position.x && tempY == senceData.character[i].position.y && senceData.character[i].show) {
-                var Chara = senceData.character[i];
-                switch (Chara.type) {
-                    case "npc":
-                        return false;
-                    case "monster":
-                        return killMonster(j-1); // j-1 因为j++ 才表示当前
-                }
+    for (var i = 0, j = 0; i < senceData.character.length; i++) {
+        if (senceData.character[i].show) {
+            j++;
+        }
+        if (tempX == senceData.character[i].position.x && tempY == senceData.character[i].position.y && senceData.character[i].show) {
+            var Chara = senceData.character[i];
+            switch (Chara.type) {
+                case "npc":
+                    return false;
+                case "monster":
+                    return killMonster(j - 1); // j-1 因为j++ 才表示当前
             }
         }
-        return true;
     }
+    return true;
 }
 
 function killMonster(i) {
     layers.chara.removeChild(layers.chara.childList[i]);
     senceData.character[i].show = false;
+    LEvent.removeEventListener(window, LKeyboardEvent.KEY_DOWN, playerEvent);
+    // killAnimation();
     return true;
 }

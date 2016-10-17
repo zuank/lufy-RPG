@@ -39,7 +39,6 @@ var layers = {
 		chara: null,
 		effect: null,
 		talk: null,
-		control: null
 	};
 	//地图块大小
 var imgCellWidth = 0,
@@ -146,8 +145,6 @@ function layerInit() {
 	layers.back.addChild(layers.mapview);
 	layers.talk = new LSprite();
 	layers.back.addChild(layers.talk);
-	layers.control = new LSprite();
-	layers.back.addChild(layers.control);
 	layers.chara = new LSprite();
 	layers.back.addChild(layers.chara);
 	layers.effect = new LSprite();
