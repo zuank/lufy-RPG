@@ -73,7 +73,7 @@ function gameInit(result) {
 	//游戏场景载入
 	gameBegin(); 
 
-	LEvent.addEventListener(window,LKeyboardEvent.KEY_DOWN, playerEvent);
+	LEvent.addEventListener(LGlobal.window,LKeyboardEvent.KEY_DOWN, playerEvent);
 }
 
 function gameBegin() {
