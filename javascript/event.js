@@ -1,16 +1,16 @@
 function playerEvent(event) {
-    switch (event.key) {
-        case "ArrowLeft":
-            playerMove(-1, 0, event.key);
+    switch (event.keyCode) {
+        case 37:
+            playerMove(-1, 0, "ArrowLeft");
             break;
-        case "ArrowUp":
-            playerMove(0, -1, event.key);
+        case 38:
+            playerMove(0, -1, "ArrowUp");
             break;
-        case "ArrowRight":
-            playerMove(1, 0, event.key);
+        case 39:
+            playerMove(1, 0, "ArrowRight");
             break;
-        case "ArrowDown":
-            playerMove(0, 1, event.key);
+        case 40:
+            playerMove(0, 1, "ArrowDown");
             break;
     }
 }
