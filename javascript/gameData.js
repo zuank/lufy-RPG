@@ -1,3 +1,6 @@
+var monsterInfo={
+
+};
 var globalData = {
     mapCol:11,
     mapRow:11,
@@ -19,10 +22,33 @@ var globalData = {
             {
                 name: "monster01",
                 type: "monster",
+                monsterType:0,
                 show: true,
                 position: 
                 {
                     x: 1,
+                    y: 0
+                }
+            },
+            {
+                name: "monster01",
+                type: "monster",
+                monsterType:1,
+                show: true,
+                position: 
+                {
+                    x: 2,
+                    y: 0
+                }
+            },
+            {
+                name: "monster01",
+                type: "monster",
+                monsterType:0,
+                show: true,
+                position: 
+                {
+                    x: 3,
                     y: 0
                 }
             },

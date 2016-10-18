@@ -135,6 +135,10 @@ function addChara(character) {
 		player.gotoAndPlay(character.status); 
 		globalData.playerInfo = character;
 	}
+	if(character.type === "monster"){
+		chara.setLabel("monster",character.monsterType,0,1,true);
+		chara.gotoAndPlay("monster"); 
+	}
 	layers.chara.addChild(chara);
 };
 
