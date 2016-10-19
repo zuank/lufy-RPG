@@ -149,6 +149,8 @@ function addChara(character) {
 function layerInit() {
 	layers.back = new LSprite();
 	addChild(layers.back);
+	layers.back.x=0;
+	layers.back.y=0;
 	layers.mapview = new LSprite();
 	layers.back.addChild(layers.mapview);
 	layers.talk = new LSprite();
