@@ -7,7 +7,7 @@
 //
 
 //初始化项目  刷新频率 节点 长 宽 callback
-LInit(50, "mylegend", 800, 480, main);
+LInit(50, "mylegend", 352, 480, main);
 //图片path数组
 var imgData = [{
 	type: "js",
@@ -132,8 +132,10 @@ function addChara(character) {
 		player.setLabel("ArrowRight",1,0,1,true);
 		player.setLabel("ArrowDown",0,0,1,true);
 		player.speed =10;
-		player.gotoAndPlay(character.status); 
-		globalData.playerInfo = character;
+		player.gotoAndPlay(character.status);
+
+		globalData.playerInfo.position = character.position;
+		globalData.playerInfo.status = character.status;
 	}
 	if(character.type === "monster"){
 		chara.setLabel("monster",character.monsterType,0,1,true);
