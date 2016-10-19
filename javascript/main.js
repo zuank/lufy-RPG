@@ -50,6 +50,8 @@ var senceData = null;
 var player = null;
 
 function main() {
+	LGlobal.stageScale = LStageScaleMode.SHOW_ALL;
+    LGlobal.screen(LStage.FULL_SCREEN);
 	//准备读取图片
 	loadingLayer = new LoadingSample3();
 	addChild(loadingLayer);
