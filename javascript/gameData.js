@@ -1,21 +1,21 @@
-var monsterInfo = {
-    monster01: [{
-        LifeValue: 100,
-        Aggressivity: 10,
-        DefenseForce: 10
-    },{
-        LifeValue: 100,
-        Aggressivity: 20,
-        DefenseForce: 10
-    }]
-};
-var globalData = {
+window.globalData = {
     mapCol: 11,
     mapRow: 11,
-    playerInfo:{
+    playerInfo: {
         LifeValue: 1000,
         Aggressivity: 20,
         DefenseForce: 5
+    },
+    monsterInfo: {
+        monster01: [{
+            LifeValue: 100,
+            Aggressivity: 10,
+            DefenseForce: 10
+        }, {
+            LifeValue: 100,
+            Aggressivity: 20,
+            DefenseForce: 10
+        }]
     },
     data: [{
         map: [
@@ -39,8 +39,7 @@ var globalData = {
             position: {
                 x: 1,
                 y: 0
-            },
-            attribute:monsterInfo.monster01[0]
+            }
         }, {
             name: "monster01",
             type: "monster",
@@ -49,8 +48,7 @@ var globalData = {
             position: {
                 x: 2,
                 y: 0
-            },
-            attribute:monsterInfo.monster01[1]
+            }
         }, {
             name: "monster01",
             type: "monster",

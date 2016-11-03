@@ -1,22 +1,7 @@
-function playerEvent(event) {
-    switch (event.keyCode) {
-        case 37:
-            playerMove(-1, 0, "ArrowLeft");
-            break;
-        case 38:
-            playerMove(0, -1, "ArrowUp");
-            break;
-        case 39:
-            playerMove(1, 0, "ArrowRight");
-            break;
-        case 40:
-            playerMove(0, 1, "ArrowDown");
-            break;
-    }
-}
 //移动角色并做相应的操作
-function playerMove(x, y, status) {
-    var charaInfo = canMove(x, y);
+window.playerMove=function(x, y, status,player,playPosition,senceData,imgCellWidth,imgCellHeight) {
+    console.log(playPosition);
+    var charaInfo = canMove(x, y,playPosition,senceData);
 
     if (charaInfo === false) {
         return;
@@ -39,15 +24,15 @@ function playerMove(x, y, status) {
     }
 
     player.gotoAndPlay(status);
-    globalData.playerInfo.position.x += x;
-    globalData.playerInfo.position.y += y;
-    player.x = globalData.playerInfo.position.x * imgCellWidth;
-    player.y = globalData.playerInfo.position.y * imgCellHeight;
+    playPosition.x += x;
+    playPosition.y += y;
+    player.x = playPosition.x * imgCellWidth;
+    player.y = playPosition.y * imgCellHeight;
 }
 //判断是否可以移动
-function canMove(x, y) {
-    var tempX = globalData.playerInfo.position.x + x,
-        tempY = globalData.playerInfo.position.y + y;
+function canMove(x, y,playPosition,senceData) {
+    var tempX = playPosition.x + x,
+        tempY = playPosition.y + y;
     //限制行动区域
     if (tempX < 0 || tempY < 0 || tempY >= globalData.mapRow || tempX >= globalData.mapCol) {
         return false;
