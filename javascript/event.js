@@ -1,5 +1,5 @@
 //移动角色并做相应的操作
-window.playerMove=function(x, y, status,player,playPosition,senceData,imgCellWidth,imgCellHeight) {
+var playerMove=function(x, y, status,player,playPosition,senceData,imgCellWidth,imgCellHeight) {
     console.log(playPosition);
     var charaInfo = canMove(x, y,playPosition,senceData);
 

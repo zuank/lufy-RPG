@@ -1,4 +1,4 @@
-window.globalData = {
+var globalData = {
     mapCol: 11,
     mapRow: 11,
     playerInfo: {
