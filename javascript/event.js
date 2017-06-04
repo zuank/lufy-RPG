@@ -43,9 +43,6 @@ function canMove(x, y,playPosition,senceData) {
     }
     //碰撞npc
     for (var i = 0, j = 0; i < senceData.character.length; i++) {
-        if (senceData.character[i].show) {
-            j++;
-        }
         if (tempX == senceData.character[i].position.x && tempY == senceData.character[i].position.y && senceData.character[i].show) {
             var Chara = senceData.character[i];
             switch (Chara.type) {
@@ -55,7 +52,7 @@ function canMove(x, y,playPosition,senceData) {
                         move: false
                     };
                 case "monster":
-                    return killMonster(j - 1); // j-1 因为j++ 才表示当前
+                    return killMonster(i);
             }
         }
     }

@@ -1,3 +1,5 @@
+// monsterType 为当前图片的序列号 用于mainjs的动画指定
+// monsterInfo 按图片区分怪物信息 并且给定属性
 var globalData = {
     mapCol: 11,
     mapRow: 11,
@@ -31,6 +33,7 @@ var globalData = {
             [2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2],
             [2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2]
         ],
+        // 存储怪物的属性 绘制时进行赋值
         character: [{
             name: "monster01",
             type: "monster",

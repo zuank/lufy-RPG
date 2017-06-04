@@ -103,11 +103,13 @@ function gameBegin() {
 //添加地图
 function addMap(mapName, mapList, imgcol, imgrow) {
 	var bitMapData = null,
+		bitMapDataCell = null,
 		bitMap = null;
 	var index, indexX, indexY;
 	//地图图片数组
 	bitMapData = new LBitmapData(imgList[mapName]);
 	mapImagesArray = LGlobal.divideCoordinate(bitMapData.image.width, bitMapData.image.height, imgcol, imgrow);
+	console.log(mapList);
 	imgCellWidth = bitMapData.image.width / imgcol;
 	imgCellHeight = bitMapData.image.height / imgrow;
 
@@ -116,10 +118,8 @@ function addMap(mapName, mapList, imgcol, imgrow) {
 	for (var i = 0; i < globalData.mapRow; i++) {
 		for (var j = 0; j < globalData.mapCol; j++) {
 			index = mapList[i][j];
-			indexY = Math.floor(index / 10);
-			indexX = index % 10;
-			bitMapData = new LBitmapData(imgList[mapName], indexX * imgCellWidth, indexY * imgCellHeight, imgCellWidth, imgCellHeight);
-			bitMap = new LBitmap(bitMapData);
+			bitMapDataCell = new LBitmapData(imgList[mapName], index * imgCellWidth, 0, imgCellWidth, imgCellHeight);
+			bitMap = new LBitmap(bitMapDataCell);
 			bitMap.x = j * imgCellWidth;
 			bitMap.y = i * imgCellHeight;
 			layers.mapview.addChild(bitMap);
@@ -128,6 +128,7 @@ function addMap(mapName, mapList, imgcol, imgrow) {
 };
 //添加人物
 function addChara(character) {
+	// 如果人物死掉了 怪物属性
 	if (character.show === false) {
 		return false;
 	}
@@ -145,9 +146,9 @@ function addChara(character) {
 		player.setLabel("ArrowUp", 3, 0, 1, true);
 		player.setLabel("ArrowRight", 1, 0, 1, true);
 		player.setLabel("ArrowDown", 0, 0, 1, true);
+		// 给英雄一个独立的速度 为了画面协调
 		player.speed = 10;
 		player.gotoAndPlay(character.status);
-
 		globalData.playerInfo.position = character.position;
 		globalData.playerInfo.status = character.status;
 	}
