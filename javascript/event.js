@@ -1,12 +1,11 @@
 //移动角色并做相应的操作
 var playerMove=function(x, y, status,player,playPosition,senceData,imgCellWidth,imgCellHeight) {
-    console.log(playPosition);
     var charaInfo = canMove(x, y,playPosition,senceData);
 
     if (charaInfo === false) {
+
         return;
     };
-
     if (charaInfo.chara === "monster") {
         if (charaInfo.move === true) {
             layers.chara.removeChild(layers.chara.childList[charaInfo.index]);
@@ -22,7 +21,6 @@ var playerMove=function(x, y, status,player,playPosition,senceData,imgCellWidth,
             return;
         }
     }
-
     player.gotoAndPlay(status);
     playPosition.x += x;
     playPosition.y += y;
@@ -38,12 +36,12 @@ function canMove(x, y,playPosition,senceData) {
         return false;
     }
     //撞墙检测
-    if (senceData.map[tempY][tempX] !== 2) {
+    if (senceData.map[tempY][tempX] !== 0) {
         return false;
     }
     //碰撞npc
     for (var i = 0, j = 0; i < senceData.character.length; i++) {
-        if (tempX == senceData.character[i].position.x && tempY == senceData.character[i].position.y && senceData.character[i].show) {
+        if (tempX === senceData.character[i].position.x && tempY === senceData.character[i].position.y && senceData.character[i].show) {
             var Chara = senceData.character[i];
             switch (Chara.type) {
                 case "npc":
