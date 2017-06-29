@@ -10,8 +10,11 @@
 LInit(50, "mylegend", 352, 480, main);
 //图片path数组
 var imgData = [{
-    name: "map", /*地图*/
+    name: "map1", /*地图*/
     path: "./images/map1.png"
+}, {
+    name: "map2", /*地图*/
+    path: "./images/map2.png"
 }, {
     name: "hero", /*英雄*/
     path: "./images/hero.png"
@@ -96,7 +99,7 @@ function playerEvent(event) {
 function gameBegin() {
     layers.chara.removeAllChild();
     //添加地图
-    addMap("map", senceData.map, 1, 2);
+    addMap();
     //添加人物
     for (var i = 0; i < senceData.character.length; i++) {
         addChara(senceData.character[i]);
@@ -104,22 +107,37 @@ function gameBegin() {
 }
 
 //添加地图
-function addMap(mapName, mapList, imgcol, imgrow) {
+function addMap() {
     var bitMapData = null,
         bitMapDataCell = null,
         bitMap = null;
     var index, indexX, indexY;
     //地图图片数组
-    bitMapData = new LBitmapData(imgList[mapName]);
-    mapImagesArray = LGlobal.divideCoordinate(bitMapData.width, bitMapData.height, imgcol, imgrow);
-    imgCellWidth = bitMapData.width / imgrow;
-    imgCellHeight = bitMapData.height / imgcol;
-    globalData.mapRow = mapList.length;
-    globalData.mapCol = mapList[0].length;
+    // bitMapData = new LBitmapData(imgList[mapName]);
+    // mapImagesArray = LGlobal.divideCoordinate(bitMapData.width, bitMapData.height, imgcol, imgrow);
+    // imgCellWidth = bitMapData.width / imgrow;
+    // imgCellHeight = bitMapData.height / imgcol;
+    // globalData.mapRow = mapList.length;
+    // globalData.mapCol = mapList[0].length;
     for (var i = 0; i < globalData.mapRow; i++) {
         for (var j = 0; j < globalData.mapCol; j++) {
-            index = mapList[i][j];
-            bitMapDataCell = new LBitmapData(imgList[mapName], index * imgCellWidth, 0, imgCellWidth, imgCellHeight);
+            index = senceData.map[i][j];
+            // 根据index的值判断地图的类型
+            // 0 道路
+            // 1 普通墙
+            // 2 星星墙
+            // 3 岩浆墙
+            if (index === 0 || index === 1) {
+                bitMapData = new LBitmapData(imgList['map1']);
+                mapImagesArray = LGlobal.divideCoordinate(bitMapData.width, bitMapData.height, 2, 1);
+                imgCellWidth = bitMapData.width / 2;
+                imgCellHeight = bitMapData.height / 1;
+            } else {
+                bitMapData = new LBitmapData(imgList['map2']);
+            }
+
+
+            bitMapDataCell = new LBitmapData(imgList['map1'], index * imgCellWidth, 0, imgCellWidth, imgCellHeight);
             bitMap = new LBitmap(bitMapDataCell);
             bitMap.x = j * imgCellWidth;
             bitMap.y = i * imgCellHeight;
