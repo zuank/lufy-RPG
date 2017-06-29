@@ -112,13 +112,7 @@ function addMap() {
         bitMapDataCell = null,
         bitMap = null;
     var index, indexX, indexY;
-    //地图图片数组
-    // bitMapData = new LBitmapData(imgList[mapName]);
-    // mapImagesArray = LGlobal.divideCoordinate(bitMapData.width, bitMapData.height, imgcol, imgrow);
-    // imgCellWidth = bitMapData.width / imgrow;
-    // imgCellHeight = bitMapData.height / imgcol;
-    // globalData.mapRow = mapList.length;
-    // globalData.mapCol = mapList[0].length;
+
     for (var i = 0; i < globalData.mapRow; i++) {
         for (var j = 0; j < globalData.mapCol; j++) {
             index = senceData.map[i][j];
@@ -132,13 +126,19 @@ function addMap() {
                 mapImagesArray = LGlobal.divideCoordinate(bitMapData.width, bitMapData.height, 2, 1);
                 imgCellWidth = bitMapData.width / 2;
                 imgCellHeight = bitMapData.height / 1;
+                bitMapDataCell = new LBitmapData(imgList['map1'], index * imgCellWidth, 0, imgCellWidth, imgCellHeight);
+                bitMap = new LBitmap(bitMapDataCell);
             } else {
                 bitMapData = new LBitmapData(imgList['map2']);
+                mapImagesArray = LGlobal.divideCoordinate(bitMapData.width, bitMapData.height, 4, 4);
+                imgCellWidth = bitMapData.width / 4;
+                imgCellHeight = bitMapData.height / 4;
+                bitMap = new LAnimationTimeline(bitMapData, mapImagesArray);
+                bitMap.setLabel("2", 2, 0, 1, true);
+                bitMap.setLabel("3", 0, 0, 1, true);
+                bitMap.speed = 5;
+                bitMap.gotoAndPlay(index);
             }
-
-
-            bitMapDataCell = new LBitmapData(imgList['map1'], index * imgCellWidth, 0, imgCellWidth, imgCellHeight);
-            bitMap = new LBitmap(bitMapDataCell);
             bitMap.x = j * imgCellWidth;
             bitMap.y = i * imgCellHeight;
             layers.mapview.addChild(bitMap);

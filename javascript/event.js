@@ -3,9 +3,9 @@ var playerMove=function(x, y, status,player,playPosition,senceData,imgCellWidth,
     var charaInfo = canMove(x, y,playPosition,senceData);
 
     if (charaInfo === false) {
-
         return;
     };
+    console.log(charaInfo)
     if (charaInfo.chara === "monster") {
         if (charaInfo.move === true) {
             layers.chara.removeChild(layers.chara.childList[charaInfo.index]);
@@ -22,6 +22,11 @@ var playerMove=function(x, y, status,player,playPosition,senceData,imgCellWidth,
         }
     }
     player.gotoAndPlay(status);
+    if (charaInfo.chara === 'npc') {
+        if(charaInfo.move === false) {
+            return
+        }
+    }
     playPosition.x += x;
     playPosition.y += y;
     player.x = playPosition.x * imgCellWidth;
