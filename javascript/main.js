@@ -16,6 +16,21 @@ var imgData = [{
     name: "map2", /*地图*/
     path: "./images/map2.png"
 }, {
+    name: "prop", /*道具*/
+    path: "./images/prop.png"
+}, {
+    name: "agentia", /*药剂*/
+    path: "./images/agentia.png"
+}, {
+    name: "article", /*系统物品*/
+    path: "./images/article.png"
+}, {
+    name: "equip", /*装备*/
+    path: "./images/equip.png"
+}, {
+    name: "key", /*钥匙*/
+    path: "./images/key.png"
+}, {
     name: "hero", /*英雄*/
     path: "./images/hero.png"
 }, {
@@ -69,6 +84,7 @@ function gameInit(result) {
     removeChild(loadingLayer);
     loadingLayer = null;
     imgList = result;
+    console.log(imgList)
     senceData = globalData.data[0];
     //游戏层显示初始化
     layerInit();
@@ -134,8 +150,8 @@ function addMap() {
                 imgCellWidth = bitMapData.width / 4;
                 imgCellHeight = bitMapData.height / 4;
                 bitMap = new LAnimationTimeline(bitMapData, mapImagesArray);
-                bitMap.setLabel("2", 2, 0, 1, true);
-                bitMap.setLabel("3", 0, 0, 1, true);
+                bitMap.setLabel("2", 2, j % 4, 1, true);
+                bitMap.setLabel("3", 0, j % 4, 1, true);
                 bitMap.speed = 5;
                 bitMap.gotoAndPlay(index);
             }
@@ -175,8 +191,8 @@ function addChara(character) {
         chara.setLabel("monster", character.monsterType, 0, 1, true);
         chara.gotoAndPlay("monster");
     }
-    if (character.type === "monster") {
-        chara.setLabel("npc", character.monsterType, 0, 1, true);
+    if (character.type === "npc") {
+        chara.setLabel("npc", character.npcType, 0, 1, true);
         chara.gotoAndPlay("npc");
     }
     layers.chara.addChild(chara);

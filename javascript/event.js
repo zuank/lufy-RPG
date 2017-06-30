@@ -21,6 +21,7 @@ var playerMove=function(x, y, status,player,playPosition,senceData,imgCellWidth,
             return;
         }
     }
+    // npc的话可以进行转向但是不能移动
     player.gotoAndPlay(status);
     if (charaInfo.chara === 'npc') {
         if(charaInfo.move === false) {

@@ -47,7 +47,7 @@ var globalData = {
             name: "fairy",
             type: "npc",
             show: true,
-            npcType: 0,
+            npcType: 3,
             position: {
                 x: 4,
                 y: 8
