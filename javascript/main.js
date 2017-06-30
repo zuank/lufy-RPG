@@ -4,7 +4,7 @@
 //
 //  Created by Yuehao Wang on 2016-10-10.
 //  Copyright 2016 Yuehao Wang. All rights reserved.
-//
+//  全局已知高度和宽度为32px 为了方便开发 直接使用了这个值
 
 //初始化项目  刷新频率 节点 长 宽 callback
 LInit(50, "mylegend", 352, 480, main);
@@ -18,6 +18,18 @@ var imgData = [{
 }, {
     name: "prop", /*道具*/
     path: "./images/prop.png"
+}, {
+    name: "upFloor", /*上楼梯*/
+    path: "./images/up_floor.png"
+}, {
+    name: "downFloor", /*下楼梯*/
+    path: "./images/down_floor.png"
+}, {
+    name: "door", /*门*/
+    path: "./images/door.png"
+}, {
+    name: "door_", /*栏杆*/
+    path: "./images/door_.png"
 }, {
     name: "agentia", /*药剂*/
     path: "./images/agentia.png"
@@ -34,7 +46,7 @@ var imgData = [{
     name: "hero", /*英雄*/
     path: "./images/hero.png"
 }, {
-    name: "fairy", /*精灵*/
+    name: "npc1", /*npc*/
     path: "./images/npc1.png"
 }, {
     name: "monster01", /*怪物1*/
@@ -97,16 +109,16 @@ function gameInit(result) {
 function playerEvent(event) {
     switch (event.keyCode) {
         case 37:
-            playerMove(-1, 0, "ArrowLeft", player, globalData.playerInfo.position, senceData, imgCellWidth, imgCellHeight);
+            playerMove(-1, 0, "ArrowLeft", player, globalData.playerInfo.position, senceData);
             break;
         case 38:
-            playerMove(0, -1, "ArrowUp", player, globalData.playerInfo.position, senceData, imgCellWidth, imgCellHeight);
+            playerMove(0, -1, "ArrowUp", player, globalData.playerInfo.position, senceData);
             break;
         case 39:
-            playerMove(1, 0, "ArrowRight", player, globalData.playerInfo.position, senceData, imgCellWidth, imgCellHeight);
+            playerMove(1, 0, "ArrowRight", player, globalData.playerInfo.position, senceData);
             break;
         case 40:
-            playerMove(0, 1, "ArrowDown", player, globalData.playerInfo.position, senceData, imgCellWidth, imgCellHeight);
+            playerMove(0, 1, "ArrowDown", player, globalData.playerInfo.position, senceData);
             break;
     }
 }
@@ -138,25 +150,19 @@ function addMap() {
             // 2 星星墙
             // 3 岩浆墙
             if (index === 0 || index === 1) {
-                bitMapData = new LBitmapData(imgList['map1']);
-                mapImagesArray = LGlobal.divideCoordinate(bitMapData.width, bitMapData.height, 2, 1);
-                imgCellWidth = bitMapData.width / 2;
-                imgCellHeight = bitMapData.height / 1;
-                bitMapDataCell = new LBitmapData(imgList['map1'], index * imgCellWidth, 0, imgCellWidth, imgCellHeight);
+                bitMapDataCell = new LBitmapData(imgList['map1'], index * globalData.size, 0, globalData.size, globalData.size);
                 bitMap = new LBitmap(bitMapDataCell);
             } else {
                 bitMapData = new LBitmapData(imgList['map2']);
                 mapImagesArray = LGlobal.divideCoordinate(bitMapData.width, bitMapData.height, 4, 4);
-                imgCellWidth = bitMapData.width / 4;
-                imgCellHeight = bitMapData.height / 4;
                 bitMap = new LAnimationTimeline(bitMapData, mapImagesArray);
                 bitMap.setLabel("2", 2, j % 4, 1, true);
                 bitMap.setLabel("3", 0, j % 4, 1, true);
                 bitMap.speed = 5;
                 bitMap.gotoAndPlay(index);
             }
-            bitMap.x = j * imgCellWidth;
-            bitMap.y = i * imgCellHeight;
+            bitMap.x = j * globalData.size;
+            bitMap.y = i * globalData.size;
             layers.mapview.addChild(bitMap);
         }
     }
@@ -168,13 +174,10 @@ function addChara(character) {
         return false;
     }
     var bitMapData = new LBitmapData(imgList[character.name]);
-    var charaWidth = bitMapData.image.width,
-        charaHeight = bitMapData.image.height;
+    var charaWidth = bitMapData.width,
+        charaHeight = bitMapData.height;
     var listChara = LGlobal.divideCoordinate(charaWidth, charaHeight, 4, 4);
     var chara = new LAnimationTimeline(bitMapData, listChara);
-    chara.speed = 3;
-    chara.x = character.position.x * imgCellWidth;
-    chara.y = character.position.y * imgCellHeight;
     if (character.type === "hero") {
         player = chara;
         player.setLabel("ArrowLeft", 2, 0, 1, true);
@@ -195,6 +198,13 @@ function addChara(character) {
         chara.setLabel("npc", character.npcType, 0, 1, true);
         chara.gotoAndPlay("npc");
     }
+    chara.speed = 3;
+    if (character.type === "door") {
+        var bitMapDataCell = new LBitmapData(imgList[character.name], 0, 0, globalData.size, globalData.size);
+        chara = new LBitmap(bitMapDataCell);
+    }
+    chara.x = character.position.x * globalData.size;
+    chara.y = character.position.y * globalData.size;
     layers.chara.addChild(chara);
 };
 

@@ -1,5 +1,5 @@
 //移动角色并做相应的操作
-var playerMove=function(x, y, status,player,playPosition,senceData,imgCellWidth,imgCellHeight) {
+var playerMove=function(x, y, status,player,playPosition,senceData) {
     var charaInfo = canMove(x, y,playPosition,senceData);
 
     if (charaInfo === false) {
@@ -30,8 +30,8 @@ var playerMove=function(x, y, status,player,playPosition,senceData,imgCellWidth,
     }
     playPosition.x += x;
     playPosition.y += y;
-    player.x = playPosition.x * imgCellWidth;
-    player.y = playPosition.y * imgCellHeight;
+    player.x = playPosition.x * globalData.size;
+    player.y = playPosition.y * globalData.size;
 }
 //判断是否可以移动
 function canMove(x, y,playPosition,senceData) {

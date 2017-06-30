@@ -3,6 +3,7 @@
 var globalData = {
     mapCol: 11,
     mapRow: 11,
+    size: 32,
     playerInfo: {
         LifeValue: 1000,
         Aggressivity: 20,
@@ -44,7 +45,17 @@ var globalData = {
             },
             status: "ArrowUp"
         },{
-            name: "fairy",
+            name: "upFloor",
+            type: "door",
+            show: true,
+            doorType: 3,
+            position: {
+                x: 5,
+                y: 0
+            },
+            status: "ArrowUp"
+        },{
+            name: "npc1",
             type: "npc",
             show: true,
             npcType: 3,
