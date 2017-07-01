@@ -96,8 +96,7 @@ function gameInit(result) {
     removeChild(loadingLayer);
     loadingLayer = null;
     imgList = result;
-    console.log(imgList)
-    senceData = globalData.data[0];
+    senceData = globalData.data[globalData.floor];
     //游戏层显示初始化
     layerInit();
     //游戏场景载入
@@ -125,7 +124,9 @@ function playerEvent(event) {
 
 
 function gameBegin() {
+    // 页面初始化
     layers.chara.removeAllChild();
+    layers.mapview.removeAllChild();
     //添加地图
     addMap();
     //添加人物
@@ -199,7 +200,7 @@ function addChara(character) {
         chara.gotoAndPlay("npc");
     }
     chara.speed = 3;
-    if (character.type === "door") {
+    if (character.type === "floor") {
         var bitMapDataCell = new LBitmapData(imgList[character.name], 0, 0, globalData.size, globalData.size);
         chara = new LBitmap(bitMapDataCell);
     }

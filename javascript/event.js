@@ -1,11 +1,11 @@
 //移动角色并做相应的操作
-var playerMove=function(x, y, status,player,playPosition,senceData) {
-    var charaInfo = canMove(x, y,playPosition,senceData);
+var playerMove=function(x, y, status,player,playPosition) {
+    var charaInfo = canMove(x, y,playPosition);
 
     if (charaInfo === false) {
         return;
-    };
-    console.log(charaInfo)
+    }
+
     if (charaInfo.chara === "monster") {
         if (charaInfo.move === true) {
             layers.chara.removeChild(layers.chara.childList[charaInfo.index]);
@@ -21,6 +21,13 @@ var playerMove=function(x, y, status,player,playPosition,senceData) {
             return;
         }
     }
+    if (charaInfo.chara === 'floor') {
+        if(charaInfo.floorType === 1) {
+            globalData.floor++
+            senceData = globalData.data[globalData.floor]
+            gameBegin()
+        }
+    }
     // npc的话可以进行转向但是不能移动
     player.gotoAndPlay(status);
     if (charaInfo.chara === 'npc') {
@@ -34,7 +41,7 @@ var playerMove=function(x, y, status,player,playPosition,senceData) {
     player.y = playPosition.y * globalData.size;
 }
 //判断是否可以移动
-function canMove(x, y,playPosition,senceData) {
+function canMove(x, y,playPosition) {
     var tempX = playPosition.x + x,
         tempY = playPosition.y + y;
     //限制行动区域
@@ -57,6 +64,11 @@ function canMove(x, y,playPosition,senceData) {
                     };
                 case "monster":
                     return killMonster(i);
+                case "floor":
+                    return {
+                        chara: "floor",
+                        floorType: Chara.floorType
+                    }
             }
         }
     }

@@ -4,6 +4,7 @@ var globalData = {
     mapCol: 11,
     mapRow: 11,
     size: 32,
+    floor: 0,
     playerInfo: {
         LifeValue: 1000,
         Aggressivity: 20,
@@ -35,23 +36,24 @@ var globalData = {
             [3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3]
         ],
         // 存储怪物的属性 绘制时进行赋值
+        // 知识点：绘制的顺序会影响z-index
         character: [{
+            name: "upFloor",
+            type: "floor",
+            show: true,
+            floorType: 1,
+            position: {
+                x: 5,
+                y: 0
+            },
+            status: "ArrowUp"
+        }, {
             name: "hero",
             type: "hero",
             show: true,
             position: {
                 x: 5,
                 y: 8
-            },
-            status: "ArrowUp"
-        },{
-            name: "upFloor",
-            type: "door",
-            show: true,
-            doorType: 3,
-            position: {
-                x: 5,
-                y: 0
             },
             status: "ArrowUp"
         },{
