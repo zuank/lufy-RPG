@@ -187,9 +187,9 @@ function addChara(character) {
         player.setLabel("ArrowDown", 0, 0, 1, true);
         // 给英雄一个独立的速度 为了画面协调
         player.speed = 10;
-        player.gotoAndPlay(character.status);
+        player.gotoAndPlay(globalData.playerInfo.status);
         globalData.playerInfo.position = character.position;
-        globalData.playerInfo.status = character.status;
+        // globalData.playerInfo.status = character.status;
     }
     if (character.type === "monster") {
         chara.setLabel("monster", character.monsterType, 0, 1, true);

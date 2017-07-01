@@ -1,6 +1,6 @@
 //移动角色并做相应的操作
-var playerMove=function(x, y, status,player,playPosition) {
-    var charaInfo = canMove(x, y,playPosition);
+var playerMove = function (x, y, status, player, playPosition) {
+    var charaInfo = canMove(x, y, playPosition);
 
     if (charaInfo === false) {
         return;
@@ -21,17 +21,19 @@ var playerMove=function(x, y, status,player,playPosition) {
             return;
         }
     }
-    if (charaInfo.chara === 'floor') {
-        if(charaInfo.floorType === 1) {
-            globalData.floor++
-            senceData = globalData.data[globalData.floor]
-            gameBegin()
-        }
-    }
     // npc的话可以进行转向但是不能移动
     player.gotoAndPlay(status);
+    globalData.playerInfo.status = status
+    if (charaInfo.chara === 'floor') {
+        globalData.floor += charaInfo.floorType
+        console.log(globalData.floor)
+        senceData = globalData.data[globalData.floor]
+        gameBegin()
+        return /*直接返回 不让英雄移动*/
+    }
+
     if (charaInfo.chara === 'npc') {
-        if(charaInfo.move === false) {
+        if (charaInfo.move === false) {
             return
         }
     }
@@ -41,7 +43,7 @@ var playerMove=function(x, y, status,player,playPosition) {
     player.y = playPosition.y * globalData.size;
 }
 //判断是否可以移动
-function canMove(x, y,playPosition) {
+function canMove(x, y, playPosition) {
     var tempX = playPosition.x + x,
         tempY = playPosition.y + y;
     //限制行动区域

@@ -8,7 +8,8 @@ var globalData = {
     playerInfo: {
         LifeValue: 1000,
         Aggressivity: 20,
-        DefenseForce: 5
+        DefenseForce: 5,
+        status: 'ArrowDown'
     },
     monsterInfo: {
         monster01: [{
@@ -45,8 +46,7 @@ var globalData = {
             position: {
                 x: 5,
                 y: 0
-            },
-            status: "ArrowUp"
+            }
         }, {
             name: "hero",
             type: "hero",
@@ -54,8 +54,7 @@ var globalData = {
             position: {
                 x: 5,
                 y: 8
-            },
-            status: "ArrowUp"
+            }
         },{
             name: "npc1",
             type: "npc",
@@ -82,6 +81,15 @@ var globalData = {
         ],
         // 存储怪物的属性 绘制时进行赋值
         character: [{
+            name: "downFloor",
+            type: "floor",
+            floorType: -1,
+            show: true,
+            position: {
+                x: 5,
+                y: 10
+            }
+        },{
             name: "monster01",
             type: "monster",
             monsterType: 0,
@@ -114,9 +122,8 @@ var globalData = {
             show: true,
             position: {
                 x: 5,
-                y: 10
-            },
-            status: "ArrowUp"
+                y: 9
+            }
         }]
     }]
 }
