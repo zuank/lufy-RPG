@@ -189,7 +189,6 @@ function addChara(character) {
         player.speed = 10;
         player.gotoAndPlay(globalData.playerInfo.status);
         globalData.playerInfo.position = character.position;
-        // globalData.playerInfo.status = character.status;
     }
     if (character.type === "monster") {
         chara.setLabel("monster", character.monsterType, 0, 1, true);
@@ -202,6 +201,10 @@ function addChara(character) {
     chara.speed = 3;
     if (character.type === "floor") {
         var bitMapDataCell = new LBitmapData(imgList[character.name], 0, 0, globalData.size, globalData.size);
+        chara = new LBitmap(bitMapDataCell);
+    }
+    if (character.type === "key") {
+        var bitMapDataCell = new LBitmapData(imgList[character.name], character.keyType.x * globalData.size, character.keyType.y * globalData.size, globalData.size, globalData.size);
         chara = new LBitmap(bitMapDataCell);
     }
     chara.x = character.position.x * globalData.size;
