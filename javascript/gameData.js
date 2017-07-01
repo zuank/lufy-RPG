@@ -24,7 +24,12 @@ var globalData = {
         LifeValue: 1000,
         Aggressivity: 20,
         DefenseForce: 5,
-        status: 'ArrowDown'
+        status: 'ArrowDown',
+        key: {
+            yellow: 0,
+            blue: 0,
+            red: 0
+        }
     },
     monsterInfo: {
         monster01: [{
@@ -282,7 +287,61 @@ var globalData = {
                 y: 9
             }
         }, {
-            name: "monster01",
+            name: "door",
+            type: "door",
+            doorType: 2,
+            show: true,
+            position: {
+                x: 5,
+                y: 8
+            }
+        },{
+            name: "door",
+            type: "door",
+            doorType: 0,
+            show: true,
+            position: {
+                x: 3,
+                y: 2
+            }
+        },{
+            name: "door",
+            type: "door",
+            doorType: 0,
+            show: true,
+            position: {
+                x: 1,
+                y: 4
+            }
+        },{
+            name: "door",
+            type: "door",
+            doorType: 0,
+            show: true,
+            position: {
+                x: 1,
+                y: 7
+            }
+        },{
+            name: "door",
+            type: "door",
+            doorType: 0,
+            show: true,
+            position: {
+                x: 5,
+                y: 5
+            }
+        },{
+            name: "door",
+            type: "door",
+            doorType: 0,
+            show: true,
+            position: {
+                x: 9,
+                y: 8
+            }
+        }, {
+            name: "monster1",
             type: "monster",
             monsterType: 0,
             show: true,
@@ -291,7 +350,7 @@ var globalData = {
                 y: 0
             }
         }, {
-            name: "monster01",
+            name: "monster1",
             type: "monster",
             monsterType: 1,
             show: true,
@@ -300,13 +359,94 @@ var globalData = {
                 y: 0
             }
         }, {
-            name: "monster01",
+            name: "monster1",
             type: "monster",
             monsterType: 0,
             show: true,
             position: {
                 x: 5,
                 y: 0
+            }
+        }, {
+            name: "monster1",
+            type: "monster",
+            monsterType: 0,
+            show: true,
+            position: {
+                x: 7,
+                y: 5
+            }
+        }, {
+            name: "monster1",
+            type: "monster",
+            monsterType: 2,
+            show: true,
+            position: {
+                x: 8,
+                y: 4
+            }
+        }, {
+            name: "monster2",
+            type: "monster",
+            monsterType: 0,
+            show: true,
+            position: {
+                x: 6,
+                y: 5
+            }
+        }, {
+            name: "monster3",
+            type: "monster",
+            monsterType: 0,
+            show: true,
+            position: {
+                x: 9,
+                y: 9
+            }
+        }, {
+            name: "monster4",
+            type: "monster",
+            monsterType: 0,
+            show: true,
+            position: {
+                x: 2,
+                y: 2
+            }
+        }, {
+            name: "monster4",
+            type: "monster",
+            monsterType: 0,
+            show: true,
+            position: {
+                x: 1,
+                y: 3
+            }
+        }, {
+            name: "monster4",
+            type: "monster",
+            monsterType: 1,
+            show: true,
+            position: {
+                x: 1,
+                y: 5
+            }
+        }, {
+            name: "monster4",
+            type: "monster",
+            monsterType: 1,
+            show: true,
+            position: {
+                x: 1,
+                y: 8
+            }
+        }, {
+            name: "monster5",
+            type: "monster",
+            monsterType: 0,
+            show: true,
+            position: {
+                x: 8,
+                y: 5
             }
         }, {
             name: "hero",

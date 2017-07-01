@@ -49,8 +49,20 @@ var imgData = [{
     name: "npc1", /*npc*/
     path: "./images/npc1.png"
 }, {
-    name: "monster01", /*怪物1*/
-    path: "./images/monster01.png"
+    name: "monster1", /*怪物1*/
+    path: "./images/monster1.png"
+}, {
+    name: "monster2", /*怪物2*/
+    path: "./images/monster2.png"
+}, {
+    name: "monster3", /*怪物3*/
+    path: "./images/monster3.png"
+}, {
+    name: "monster4", /*怪物4*/
+    path: "./images/monster4.png"
+}, {
+    name: "monster5", /*怪物5*/
+    path: "./images/monster5.png"
 }];
 
 //预加载完成的图片数组
@@ -205,6 +217,10 @@ function addChara(character) {
     }
     if (character.type === "key") {
         var bitMapDataCell = new LBitmapData(imgList[character.name], character.keyType.x * globalData.size, character.keyType.y * globalData.size, globalData.size, globalData.size);
+        chara = new LBitmap(bitMapDataCell);
+    }
+    if (character.type === "door") {
+        var bitMapDataCell = new LBitmapData(imgList[character.name], character.doorType * globalData.size, 0, globalData.size, globalData.size);
         chara = new LBitmap(bitMapDataCell);
     }
     chara.x = character.position.x * globalData.size;
