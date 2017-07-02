@@ -34,6 +34,9 @@ var imgData = [{
     name: "agentia", /*药剂*/
     path: "./images/agentia.png"
 }, {
+    name: "gem", /*宝石*/
+    path: "./images/gem.png"
+}, {
     name: "article", /*系统物品*/
     path: "./images/article.png"
 }, {
@@ -139,12 +142,14 @@ function gameBegin() {
     // 页面初始化
     layers.chara.removeAllChild();
     layers.mapview.removeAllChild();
-    //添加地图
     addMap();
-    //添加人物
-    for (var i = 0; i < senceData.character.length; i++) {
-        addChara(senceData.character[i]);
-    }
+    addChara();
+    addGoods();
+    // addDoor();
+    // addMonster();
+    // for (var i = 0; i < senceData.character.length; i++) {
+    //     addChara(senceData.character[i]);
+    // }
 }
 
 //添加地图
@@ -152,7 +157,7 @@ function addMap() {
     var bitMapData = null,
         bitMapDataCell = null,
         bitMap = null;
-    var index, indexX, indexY;
+    var index;
 
     for (var i = 0; i < globalData.mapRow; i++) {
         for (var j = 0; j < globalData.mapCol; j++) {
@@ -180,53 +185,133 @@ function addMap() {
         }
     }
 };
+function addChara() {
+    var bitMapData = null,
+        bitMap = null;
+    var index;
+
+    for (var i = 0; i < globalData.mapRow; i++) {
+        for (var j = 0; j < globalData.mapCol; j++) {
+            index = senceData.chara[i][j];
+            console.log(index)
+            if (index !== 0) {
+                bitMapData = new LBitmapData(imgList[configChara[index].img]);
+                mapImagesArray = LGlobal.divideCoordinate(bitMapData.width, bitMapData.height, 4, 4);
+                bitMap = new LAnimationTimeline(bitMapData, mapImagesArray);
+                bitMap.setLabel("npc", configChara[index].y, 0, 1, true);
+                bitMap.speed = 5;
+                bitMap.gotoAndPlay("npc");
+                bitMap.x = j * globalData.size;
+                bitMap.y = i * globalData.size;
+                layers.chara.addChild(bitMap);
+            }
+        }
+    }
+}
+function addMonster() {
+    var bitMapData = null,
+        bitMap = null;
+    var index;
+
+    for (var i = 0; i < globalData.mapRow; i++) {
+        for (var j = 0; j < globalData.mapCol; j++) {
+            index = senceData.monster[i][j];
+            if (index !== 0) {
+                bitMapData = new LBitmapData(imgList[configMonster[index].img]);
+                mapImagesArray = LGlobal.divideCoordinate(bitMapData.width, bitMapData.height, 4, 4);
+                bitMap = new LAnimationTimeline(bitMapData, mapImagesArray);
+                bitMap.setLabel("monster", configMonster[index].y, 0, 1, true);
+                bitMap.speed = 5;
+                bitMap.gotoAndPlay("monster");
+                bitMap.x = j * globalData.size;
+                bitMap.y = i * globalData.size;
+                layers.chara.addChild(bitMap);
+            }
+        }
+    }
+}
+function addGoods() {
+    var bitMap = null;
+    var index;
+
+    for (var i = 0; i < globalData.mapRow; i++) {
+        for (var j = 0; j < globalData.mapCol; j++) {
+            index = senceData.goods[i][j];
+            if (index !== 0) {
+                bitMapDataCell = new LBitmapData(imgList[configGoods[index].img], configGoods[index].x * globalData.size, configGoods[index].y * globalData.size, globalData.size, globalData.size);
+                bitMap = new LBitmap(bitMapDataCell);
+                bitMap.x = j * globalData.size;
+                bitMap.y = i * globalData.size;
+                layers.chara.addChild(bitMap);
+            }
+        }
+    }
+}
+function addDoor() {
+    var bitMapData = null,
+        bitMap = null;
+    var index;
+
+    for (var i = 0; i < globalData.mapRow; i++) {
+        for (var j = 0; j < globalData.mapCol; j++) {
+            index = senceData.door[i][j];
+            if (index !== 0) {
+                bitMapDataCell = new LBitmapData(imgList[configDoor[index].img], configDoor[index].x * globalData.size, configDoor[index].y * globalData.size, globalData.size, globalData.size);
+                bitMap = new LBitmap(bitMapDataCell);
+                bitMap.x = j * globalData.size;
+                bitMap.y = i * globalData.size;
+                layers.chara.addChild(bitMap);
+            }
+        }
+    }
+}
 //添加人物
-function addChara(character) {
-    // 如果人物死掉了 怪物属性
-    if (character.show === false) {
-        return false;
-    }
-    var bitMapData = new LBitmapData(imgList[character.name]);
-    var charaWidth = bitMapData.width,
-        charaHeight = bitMapData.height;
-    var listChara = LGlobal.divideCoordinate(charaWidth, charaHeight, 4, 4);
-    var chara = new LAnimationTimeline(bitMapData, listChara);
-    if (character.type === "hero") {
-        player = chara;
-        player.setLabel("ArrowLeft", 2, 0, 1, true);
-        player.setLabel("ArrowUp", 3, 0, 1, true);
-        player.setLabel("ArrowRight", 1, 0, 1, true);
-        player.setLabel("ArrowDown", 0, 0, 1, true);
-        // 给英雄一个独立的速度 为了画面协调
-        player.speed = 10;
-        player.gotoAndPlay(globalData.playerInfo.status);
-        globalData.playerInfo.position = character.position;
-    }
-    if (character.type === "monster") {
-        chara.setLabel("monster", character.monsterType, 0, 1, true);
-        chara.gotoAndPlay("monster");
-    }
-    if (character.type === "npc") {
-        chara.setLabel("npc", character.npcType, 0, 1, true);
-        chara.gotoAndPlay("npc");
-    }
-    chara.speed = 3;
-    if (character.type === "floor") {
-        var bitMapDataCell = new LBitmapData(imgList[character.name], 0, 0, globalData.size, globalData.size);
-        chara = new LBitmap(bitMapDataCell);
-    }
-    if (character.type === "key") {
-        var bitMapDataCell = new LBitmapData(imgList[character.name], character.keyType.x * globalData.size, character.keyType.y * globalData.size, globalData.size, globalData.size);
-        chara = new LBitmap(bitMapDataCell);
-    }
-    if (character.type === "door") {
-        var bitMapDataCell = new LBitmapData(imgList[character.name], character.doorType * globalData.size, 0, globalData.size, globalData.size);
-        chara = new LBitmap(bitMapDataCell);
-    }
-    chara.x = character.position.x * globalData.size;
-    chara.y = character.position.y * globalData.size;
-    layers.chara.addChild(chara);
-};
+// function addChara(character) {
+//     // 如果人物死掉了 怪物属性
+//     if (character.show === false) {
+//         return false;
+//     }
+//     var bitMapData = new LBitmapData(imgList[character.name]);
+//     var charaWidth = bitMapData.width,
+//         charaHeight = bitMapData.height;
+//     var listChara = LGlobal.divideCoordinate(charaWidth, charaHeight, 4, 4);
+//     var chara = new LAnimationTimeline(bitMapData, listChara);
+//     if (character.type === "hero") {
+//         player = chara;
+//         player.setLabel("ArrowLeft", 2, 0, 1, true);
+//         player.setLabel("ArrowUp", 3, 0, 1, true);
+//         player.setLabel("ArrowRight", 1, 0, 1, true);
+//         player.setLabel("ArrowDown", 0, 0, 1, true);
+//         // 给英雄一个独立的速度 为了画面协调
+//         player.speed = 10;
+//         player.gotoAndPlay(globalData.playerInfo.status);
+//         globalData.playerInfo.position = character.position;
+//     }
+//     if (character.type === "monster") {
+//         chara.setLabel("monster", character.monsterType, 0, 1, true);
+//         chara.gotoAndPlay("monster");
+//     }
+//     if (character.type === "npc") {
+//         chara.setLabel("npc", character.npcType, 0, 1, true);
+//         chara.gotoAndPlay("npc");
+//     }
+//     chara.speed = 3;
+//     if (character.type === "floor") {
+//         var bitMapDataCell = new LBitmapData(imgList[character.name], 0, 0, globalData.size, globalData.size);
+//         chara = new LBitmap(bitMapDataCell);
+//     }
+//     if (character.type === "key") {
+//         var bitMapDataCell = new LBitmapData(imgList[character.name], character.keyType.x * globalData.size, character.keyType.y * globalData.size, globalData.size, globalData.size);
+//         chara = new LBitmap(bitMapDataCell);
+//     }
+//     if (character.type === "door") {
+//         var bitMapDataCell = new LBitmapData(imgList[character.name], character.doorType * globalData.size, 0, globalData.size, globalData.size);
+//         chara = new LBitmap(bitMapDataCell);
+//     }
+//     chara.x = character.position.x * globalData.size;
+//     chara.y = character.position.y * globalData.size;
+//     layers.chara.addChild(chara);
+// };
 
 function layerInit() {
     layers.back = new LSprite();
