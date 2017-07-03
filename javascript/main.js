@@ -145,6 +145,7 @@ function gameBegin() {
     addMap();
     addChara();
     addGoods();
+    addPlayer();
     // addDoor();
     // addMonster();
     // for (var i = 0; i < senceData.character.length; i++) {
@@ -246,6 +247,23 @@ function addGoods() {
             }
         }
     }
+}
+function addPlayer() {
+    var bitMapData = new LBitmapData(imgList['hero']);
+    var listChara = LGlobal.divideCoordinate(bitMapData.width, bitMapData.height, 4, 4);
+    var chara = new LAnimationTimeline(bitMapData, listChara);
+        player = chara;
+        player.setLabel("ArrowLeft", 2, 0, 1, true);
+        player.setLabel("ArrowUp", 3, 0, 1, true);
+        player.setLabel("ArrowRight", 1, 0, 1, true);
+        player.setLabel("ArrowDown", 0, 0, 1, true);
+        // 给英雄一个独立的速度 为了画面协调
+        player.speed = 10;
+        player.gotoAndPlay('ArrowDown');
+        globalData.playerInfo.position = senceData.playerPosition;
+        chara.x = senceData.playerPosition.x * globalData.size;
+        chara.y = senceData.playerPosition.y * globalData.size;
+        layers.chara.addChild(chara);
 }
 function addDoor() {
     var bitMapData = null,

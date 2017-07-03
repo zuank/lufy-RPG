@@ -55,25 +55,25 @@ function canMove(x, y, playPosition) {
         return false;
     }
     //碰撞npc
-    for (var i = 0, j = 0; i < senceData.character.length; i++) {
-        if (tempX === senceData.character[i].position.x && tempY === senceData.character[i].position.y && senceData.character[i].show) {
-            var Chara = senceData.character[i];
-            switch (Chara.type) {
-                case "npc":
-                    return {
-                        chara: "npc",
-                        move: false
-                    };
-                case "monster":
-                    return killMonster(i);
-                case "floor":
-                    return {
-                        chara: "floor",
-                        floorType: Chara.floorType
-                    }
-            }
-        }
-    }
+    // for (var i = 0, j = 0; i < senceData.character.length; i++) {
+    //     if (tempX === senceData.character[i].position.x && tempY === senceData.character[i].position.y && senceData.character[i].show) {
+    //         var Chara = senceData.character[i];
+    //         switch (Chara.type) {
+    //             case "npc":
+    //                 return {
+    //                     chara: "npc",
+    //                     move: false
+    //                 };
+    //             case "monster":
+    //                 return killMonster(i);
+    //             case "floor":
+    //                 return {
+    //                     chara: "floor",
+    //                     floorType: Chara.floorType
+    //                 }
+    //         }
+    //     }
+    // }
     return true;
 }
 //不能杀死的怪物 角色不能移动
