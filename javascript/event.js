@@ -21,20 +21,28 @@ var playerMove = function (x, y, status) {
             case 'key':
                 getKey(moveInfo.key);
                 // 从图层中移除对象 同事更新数据列表
-                removeGoods(moveInfo.position.y, moveInfo.position.x);
+                removeGoodsAddChara('goods', moveInfo.position.y, moveInfo.position.x);
                 player.gotoAndPlay(status);
                 return;
             /*不执行之后的运动操作*/
             case 'door':
                 var bol = canOper(moveInfo.key)
                 if (bol) {
-                    removeGoods(moveInfo.position.y, moveInfo.position.x);
+                    removeGoodsAddChara('goods', moveInfo.position.y, moveInfo.position.x);
                     player.gotoAndPlay(status);
                 }
                 return;
         }
     }
-
+    if (moveInfo.type === 'chara') {
+        switch (moveInfo.charaType) {
+            case 'monster':
+                //  TODO      这边需要添加能不能kill
+                removeGoodsAddChara('chara', moveInfo.position.y, moveInfo.position.x);
+                player.gotoAndPlay(status);
+                return;
+        }
+    }
     player.gotoAndPlay(status);
     senceData.playerPosition.x += x;
     senceData.playerPosition.y += y;
@@ -42,8 +50,8 @@ var playerMove = function (x, y, status) {
     player.y = senceData.playerPosition.y * globalData.size;
 }
 //移除物品
-function removeGoods(y, x) {
-    senceData.goods[y][x] = 0
+function removeGoodsAddChara(type, y, x) {
+    senceData[type][y][x] = 0
     layers.chara.getChildByName(globalData.floor + '_' + y + '_' + x).remove();
 }
 //拾取钥匙
@@ -63,7 +71,7 @@ function getKey(type) {
             return;
     }
 }
-//拾取钥匙
+//能否开门
 function canOper(type) {
     switch (type) {
         case 'door0':
@@ -121,7 +129,16 @@ function canMove(x, y) {
     }
     //碰撞人物
     if (senceData.chara[tempY][tempX] !== 0) {
-        return false
+        type = getType(senceData.chara[tempY][tempX])
+        return {
+            type: 'chara',
+            charaType: type,
+            key: senceData.chara[tempY][tempX],
+            position: {
+                x: tempX,
+                y: tempY
+            }
+        }
     }
     return true;
 }
