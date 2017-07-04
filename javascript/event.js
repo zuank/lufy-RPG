@@ -1,7 +1,6 @@
 //移动角色并做相应的操作
 var playerMove = function (x, y, status) {
     var moveInfo = canMove(x, y);
-    console.log(moveInfo)
     if (moveInfo === false) {
         return;
     }
@@ -9,52 +8,89 @@ var playerMove = function (x, y, status) {
         switch (moveInfo.goodsType) {
             case 'upFloor':
                 globalData.floor++;
+                gameInfo.floor.text = '第' + globalData.floor + '层';
                 drawInit();
-                return; /*不执行之后的运动操作*/
-                break;
+                return;
+            /*不执行之后的运动操作*/
             case 'downFloor':
                 globalData.floor--;
+                gameInfo.floor.text = '第' + globalData.floor + '层';
                 drawInit();
-                return; /*不执行之后的运动操作*/
-                break;
+                return;
+            /*不执行之后的运动操作*/
+            case 'key':
+                getKey(moveInfo.key);
+                // 从图层中移除对象 同事更新数据列表
+                removeGoods(moveInfo.position.y, moveInfo.position.x);
+                player.gotoAndPlay(status);
+                return;
+            /*不执行之后的运动操作*/
+            case 'door':
+                var bol = canOper(moveInfo.key)
+                if (bol) {
+                    removeGoods(moveInfo.position.y, moveInfo.position.x);
+                    player.gotoAndPlay(status);
+                }
+                return;
         }
     }
-    // if (charaInfo.chara === "monster") {
-    //     if (charaInfo.move === true) {
-    //         layers.chara.removeChild(layers.chara.childList[charaInfo.index]);
-    //         senceData.character[charaInfo.index].show = false;
-    //         LEvent.removeEventListener(window, LKeyboardEvent.KEY_DOWN, playerEvent);
-    //         var timer = new LTimer(1000, 1);
-    //         timer.addEventListener(LTimerEvent.TIMER, function () {
-    //             LEvent.addEventListener(window, LKeyboardEvent.KEY_DOWN, playerEvent);
-    //         });
-    //         timer.start();
-    //     }
-    //     if (charaInfo.move === false) {
-    //         return;
-    //     }
-    // }
-    // npc的话可以进行转向但是不能移动
-    player.gotoAndPlay(status);
-    globalData.playerInfo.status = status
-    // if (charaInfo.chara === 'floor') {
-    //     globalData.floor += charaInfo.floorType
-    //     console.log(globalData.floor)
-    //     senceData = globalData.data[globalData.floor]
-    //     gameBegin()
-    //     return
-    //     /*直接返回 不让英雄移动*/
-    // }
 
-    // if (charaInfo.chara === 'npc') {
-    //     if (charaInfo.move === false) {
-    //         return
-    //     }
-    // }
+    player.gotoAndPlay(status);
     senceData.playerPosition.x += x;
     senceData.playerPosition.y += y;
     player.x = senceData.playerPosition.x * globalData.size;
     player.y = senceData.playerPosition.y * globalData.size;
+}
+//移除物品
+function removeGoods(y, x) {
+    senceData.goods[y][x] = 0
+    layers.chara.getChildByName(globalData.floor + '_' + y + '_' + x).remove();
+}
+//拾取钥匙
+function getKey(type) {
+    switch (type) {
+        case 'key0':
+            globalData.playerInfo.key.yellow++;
+            gameInfo.keyYellow.text = '黄钥匙： ' + globalData.playerInfo.key.yellow;
+            return;
+        case 'key1':
+            globalData.playerInfo.key.blue++;
+            gameInfo.keyBlue.text = '蓝钥匙： ' + globalData.playerInfo.key.blue;
+            return;
+        case 'key2':
+            globalData.playerInfo.key.red++;
+            gameInfo.keyRed.text = '红钥匙： ' + globalData.playerInfo.key.red;
+            return;
+    }
+}
+//拾取钥匙
+function canOper(type) {
+    switch (type) {
+        case 'door0':
+            if (globalData.playerInfo.key.yellow > 0) {
+                globalData.playerInfo.key.yellow--;
+                gameInfo.keyYellow.text = '黄钥匙： ' + globalData.playerInfo.key.yellow;
+                return true;
+            } else {
+                return false
+            }
+        case 'door1':
+            if (globalData.playerInfo.key.blue > 0) {
+                globalData.playerInfo.key.blue--;
+                gameInfo.keyBlue.text = '蓝钥匙： ' + globalData.playerInfo.key.blue;
+                return true;
+            } else {
+                return false
+            }
+        case 'door2':
+            if (globalData.playerInfo.key.red > 0) {
+                globalData.playerInfo.key.red--;
+                gameInfo.keyRed.text = '红钥匙： ' + globalData.playerInfo.key.red;
+                return true;
+            } else {
+                return false
+            }
+    }
 }
 //判断是否可以移动
 function canMove(x, y) {
@@ -72,56 +108,24 @@ function canMove(x, y) {
     // 碰撞物品
     if (senceData.goods[tempY][tempX] !== 0) {
         type = getType(senceData.goods[tempY][tempX])
-        switch (type) {
-            case 'upFloor':
-                return {
-                    type: 'goods',
-                    goodsType: 'upFloor'
-                }
-                break;
-            case 'downFloor':
-                return {
-                    type: 'goods',
-                    goodsType: 'downFloor'
-                }
-                break;
+        // 会将坐标和物品类型返回
+        return {
+            type: 'goods',
+            goodsType: type,
+            key: senceData.goods[tempY][tempX],
+            position: {
+                x: tempX,
+                y: tempY
+            }
         }
-        return false
     }
     //碰撞人物
     if (senceData.chara[tempY][tempX] !== 0) {
         return false
     }
-    //碰撞npc
-    // for (var i = 0, j = 0; i < senceData.character.length; i++) {
-    //     if (tempX === senceData.character[i].position.x && tempY === senceData.character[i].position.y && senceData.character[i].show) {
-    //         var Chara = senceData.character[i];
-    //         switch (Chara.type) {
-    //             case "npc":
-    //                 return {
-    //                     chara: "npc",
-    //                     move: false
-    //                 };
-    //             case "monster":
-    //                 return killMonster(i);
-    //             case "floor":
-    //                 return {
-    //                     chara: "floor",
-    //                     floorType: Chara.floorType
-    //                 }
-    //         }
-    //     }
-    // }
     return true;
 }
-//不能杀死的怪物 角色不能移动
-function killMonster(i) {
-    return {
-        chara: "monster",
-        move: true,
-        index: i
-    };
-}
+
 function getType(str) {
     return str.match(/[a-zA-Z]/g).join('')
 }

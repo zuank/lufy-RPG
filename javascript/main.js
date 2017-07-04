@@ -7,7 +7,7 @@
 //  全局已知高度和宽度为32px 为了方便开发 直接使用了这个值
 
 //初始化项目  刷新频率 节点 长 宽 callback
-LInit(50, "mylegend", 352, 480, main);
+LInit(50, "mylegend", 352, 544, main);
 //图片path数组
 var imgData = [{
     name: "map1", /*地图*/
@@ -83,17 +83,16 @@ var layers = {
     talk: null,
 };
 //地图块大小
-var imgCellWidth = 0,
-    imgCellHeight = 0;
 
-//当前场景
+//当前场景信息
 var senceData = null;
 //hero
 var player = null;
-
+var gameInfo = {};
 function main() {
+    LGlobal.align = LStageAlign.MIDDLE;
     LGlobal.stageScale = LStageScaleMode.SHOW_ALL;
-    LGlobal.screen(LStage.FULL_SCREEN);
+    LSystem.screen(LStage.FULL_SCREEN);
     //准备读取图片
     loadingLayer = new LoadingSample3();
     addChild(loadingLayer);
@@ -115,7 +114,8 @@ function gameInit(result) {
     layerInit();
     //游戏场景载入
     drawInit();
-
+    // 游戏信息展示
+    drawGameInfo();
     LEvent.addEventListener(LGlobal.window, LKeyboardEvent.KEY_DOWN, playerEvent);
 }
 
@@ -135,7 +135,40 @@ function playerEvent(event) {
             break;
     }
 }
-
+function drawGameInfo() {
+    // 楼层显示
+    gameInfo.floor = new LTextField();
+    gameInfo.floor.text = '第' + globalData.floor + '层';
+    gameInfo.floor.x = 152; /*这个数值是试出来  直接计算的数值偏右*/
+    gameInfo.floor.y = 5;
+    gameInfo.floor.size = 20;
+    gameInfo.floor.color = "#FFF";
+    layers.effect.addChild(gameInfo.floor);
+//    黄钥匙
+    gameInfo.keyYellow = new LTextField();
+    gameInfo.keyYellow.text = '黄钥匙： ' + globalData.playerInfo.key.yellow;
+    gameInfo.keyYellow.x = 10;
+    gameInfo.keyYellow.y = 25;
+    gameInfo.keyYellow.size = 15;
+    gameInfo.keyYellow.color = "#FFF";
+    layers.effect.addChild(gameInfo.keyYellow);
+    //    蓝钥匙
+    gameInfo.keyBlue = new LTextField();
+    gameInfo.keyBlue.text = '蓝钥匙： ' + globalData.playerInfo.key.blue;
+    gameInfo.keyBlue.x = 10;
+    gameInfo.keyBlue.y = 40;
+    gameInfo.keyBlue.size = 15;
+    gameInfo.keyBlue.color = "#FFF";
+    layers.effect.addChild(gameInfo.keyBlue);
+//    红钥匙
+    gameInfo.keyRed = new LTextField();
+    gameInfo.keyRed.text = '红钥匙： ' + globalData.playerInfo.key.red;
+    gameInfo.keyRed.x = 10;
+    gameInfo.keyRed.y = 55;
+    gameInfo.keyRed.size = 15;
+    gameInfo.keyRed.color = "#FFF";
+    layers.effect.addChild(gameInfo.keyRed);
+}
 
 function drawInit() {
     senceData = globalData.data[globalData.floor];
@@ -188,9 +221,7 @@ function addChara() {
 
     for (var i = 0; i < globalData.mapRow; i++) {
         for (var j = 0; j < globalData.mapCol; j++) {
-            console.log(senceData.chara[i][j])
             index = senceData.chara[i][j];
-            console.log(index)
             if (index !== 0) {
                 bitMapData = new LBitmapData(imgList[configChara[index].img]);
                 mapImagesArray = LGlobal.divideCoordinate(bitMapData.width, bitMapData.height, 4, 4);
@@ -200,6 +231,7 @@ function addChara() {
                 bitMap.gotoAndPlay("npc");
                 bitMap.x = j * globalData.size;
                 bitMap.y = i * globalData.size;
+                bitMap.name = globalData.floor + '_' + i + '_' + j
                 layers.chara.addChild(bitMap);
             }
         }
@@ -217,6 +249,7 @@ function addGoods() {
                 bitMap = new LBitmap(bitMapDataCell);
                 bitMap.x = j * globalData.size;
                 bitMap.y = i * globalData.size;
+                bitMap.name = globalData.floor + '_' + i + '_' + j
                 layers.chara.addChild(bitMap);
             }
         }
@@ -226,22 +259,26 @@ function addPlayer() {
     var bitMapData = new LBitmapData(imgList['hero']);
     var listChara = LGlobal.divideCoordinate(bitMapData.width, bitMapData.height, 4, 4);
     var chara = new LAnimationTimeline(bitMapData, listChara);
-        player = chara;
-        player.setLabel("ArrowLeft", 2, 0, 1, true);
-        player.setLabel("ArrowUp", 3, 0, 1, true);
-        player.setLabel("ArrowRight", 1, 0, 1, true);
-        player.setLabel("ArrowDown", 0, 0, 1, true);
-        // 给英雄一个独立的速度 为了画面协调
-        player.speed = 10;
-        player.gotoAndPlay('ArrowDown');
-        globalData.playerInfo.position = senceData.playerPosition;
-        chara.x = senceData.playerPosition.x * globalData.size;
-        chara.y = senceData.playerPosition.y * globalData.size;
-        layers.chara.addChild(chara);
+    player = chara;
+    player.setLabel("ArrowLeft", 2, 0, 1, true);
+    player.setLabel("ArrowUp", 3, 0, 1, true);
+    player.setLabel("ArrowRight", 1, 0, 1, true);
+    player.setLabel("ArrowDown", 0, 0, 1, true);
+    // 给英雄一个独立的速度 为了画面协调
+    player.speed = 10;
+    player.gotoAndPlay('ArrowDown');
+    // player.scaleX = 0.5;
+    // player.scaleY = 0.5;
+    player.name ='hero';
+    globalData.playerInfo.position = senceData.playerPosition;
+    chara.x = senceData.playerPosition.x * globalData.size;
+    chara.y = senceData.playerPosition.y * globalData.size;
+    layers.chara.addChild(chara);
 }
 
 function layerInit() {
     layers.back = new LSprite();
+    layers.back.graphics.drawRect(0, '#103820', [0, 0, LGlobal.width, LGlobal.height], true, '#012345');
     addChild(layers.back);
     layers.back.x = 0;
     layers.back.y = 0;
@@ -252,5 +289,7 @@ function layerInit() {
     layers.chara = new LSprite();
     layers.back.addChild(layers.chara);
     layers.effect = new LSprite();
+    layers.effect.x = 0
+    layers.effect.y = 11 * globalData.size
     layers.back.addChild(layers.effect);
 }
