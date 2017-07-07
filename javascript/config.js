@@ -47,6 +47,11 @@ var configGoods = {
         y: 0
     },
     'door3': {
+        img: 'door',
+        x: 3,
+        y: 0
+    },
+    'door4': {
         img: 'door_',
         x: 3,
         y: 0
@@ -64,6 +69,26 @@ var configGoods = {
     'key2': {
         img: 'key',
         x: 2,
+        y: 0
+    },
+    'agentia0':{
+        img:'agentia',
+        x: 0,
+        y:0
+    },
+    'agentia1':{
+        img:'agentia',
+        x: 1,
+        y:0
+    },
+    'prop0': {
+        img: 'prop',
+        x:2,
+        y:2
+    },
+    'equip0': {
+        img: 'equip',
+        x: 0,
         y: 0
     }
 }
@@ -163,6 +188,22 @@ var configChara = {
     },
     'monster19': {
         img: 'monster5',
+        y: 3
+    },
+    'monster20': {
+        img: 'monster6',
+        y: 0
+    },
+    'monster21': {
+        img: 'monster6',
+        y: 1
+    },
+    'monster22': {
+        img: 'monster6',
+        y: 2
+    },
+    'monster23': {
+        img: 'monster6',
         y: 3
     }
 }

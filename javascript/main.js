@@ -66,6 +66,9 @@ var imgData = [{
 }, {
     name: "monster5", /*怪物5*/
     path: "./images/monster5.png"
+}, {
+    name: "monster6", /*怪物6*/
+    path: "./images/monster6.png"
 }];
 
 //预加载完成的图片数组
@@ -134,6 +137,7 @@ function playerEvent(event) {
             playerMove(0, 1, "ArrowDown");
             break;
     }
+    return false;
 }
 function drawGameInfo() {
     // 楼层显示
