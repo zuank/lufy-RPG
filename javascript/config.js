@@ -90,6 +90,16 @@ var configGoods = {
         img: 'equip',
         x: 0,
         y: 0
+    },
+    'shop0': {
+        img:'shop_',
+        x:0,
+        y:0
+    },
+    'shop1': {
+        img:'shop_',
+        x:2,
+        y:0
     }
 }
 
@@ -109,6 +119,10 @@ var configChara = {
     'npc3': {
         img: 'npc1',
         y: 3,
+    },
+    'npc4': {
+        img: 'npc2',
+        y: 2,
     },
     'monster0': {
         img: 'monster1',

@@ -30,6 +30,9 @@ var imgData = [{
 }, {
     name: "door_", /*栏杆*/
     path: "./images/door_.png"
+},{
+    name: "shop_", /*商店不动的*/
+    path: "./images/shop.png"
 }, {
     name: "agentia", /*药剂*/
     path: "./images/agentia.png"
@@ -51,6 +54,9 @@ var imgData = [{
 }, {
     name: "npc1", /*npc*/
     path: "./images/npc1.png"
+}, {
+    name: "npc2", /*npc*/
+    path: "./images/npc2.png"
 }, {
     name: "monster1", /*怪物1*/
     path: "./images/monster1.png"
