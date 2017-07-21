@@ -52,7 +52,6 @@ var mota = {
     },
     // 事件触发
     playerEvent: function (event) {
-        event.preventDefault()
         switch (event.keyCode) {
             case 37:
                 mota.playerMove(-1, 0, "ArrowLeft");
@@ -67,6 +66,7 @@ var mota = {
                 mota.playerMove(0, 1, "ArrowDown");
                 break;
         }
+        return false;
     },
     // 游戏信息展示 包括当前楼层 角色血量等
     drawGameInfo: function () {
@@ -383,3 +383,4 @@ LInit(50, "mylegend", 352, 544, mota.main);
 function getType(str) {
     return str.match(/[a-zA-Z]/g).join('')
 }
+
