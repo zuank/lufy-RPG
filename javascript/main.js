@@ -8,74 +8,6 @@
 
 //初始化项目  刷新频率 节点 长 宽 callback
 LInit(50, "mylegend", 352, 544, main);
-//图片path数组
-var imgData = [{
-    name: "map1", /*地图*/
-    path: "./images/map1.png"
-}, {
-    name: "map2", /*地图*/
-    path: "./images/map2.png"
-}, {
-    name: "prop", /*道具*/
-    path: "./images/prop.png"
-}, {
-    name: "upFloor", /*上楼梯*/
-    path: "./images/up_floor.png"
-}, {
-    name: "downFloor", /*下楼梯*/
-    path: "./images/down_floor.png"
-}, {
-    name: "door", /*门*/
-    path: "./images/door.png"
-}, {
-    name: "door_", /*栏杆*/
-    path: "./images/door_.png"
-},{
-    name: "shop_", /*商店不动的*/
-    path: "./images/shop.png"
-}, {
-    name: "agentia", /*药剂*/
-    path: "./images/agentia.png"
-}, {
-    name: "gem", /*宝石*/
-    path: "./images/gem.png"
-}, {
-    name: "article", /*系统物品*/
-    path: "./images/article.png"
-}, {
-    name: "equip", /*装备*/
-    path: "./images/equip.png"
-}, {
-    name: "key", /*钥匙*/
-    path: "./images/key.png"
-}, {
-    name: "hero", /*英雄*/
-    path: "./images/hero.png"
-}, {
-    name: "npc1", /*npc*/
-    path: "./images/npc1.png"
-}, {
-    name: "npc2", /*npc*/
-    path: "./images/npc2.png"
-}, {
-    name: "monster1", /*怪物1*/
-    path: "./images/monster1.png"
-}, {
-    name: "monster2", /*怪物2*/
-    path: "./images/monster2.png"
-}, {
-    name: "monster3", /*怪物3*/
-    path: "./images/monster3.png"
-}, {
-    name: "monster4", /*怪物4*/
-    path: "./images/monster4.png"
-}, {
-    name: "monster5", /*怪物5*/
-    path: "./images/monster5.png"
-}, {
-    name: "monster6", /*怪物6*/
-    path: "./images/monster6.png"
-}];
 
 //预加载完成的图片数组
 var imgList = {};
@@ -91,7 +23,6 @@ var layers = {
     effect: null,
     talk: null,
 };
-//地图块大小
 
 //当前场景信息
 var senceData = null;
@@ -129,6 +60,7 @@ function gameInit(result) {
 }
 
 function playerEvent(event) {
+    event.preventDefault()
     switch (event.keyCode) {
         case 37:
             playerMove(-1, 0, "ArrowLeft");
@@ -154,7 +86,7 @@ function drawGameInfo() {
     gameInfo.floor.size = 20;
     gameInfo.floor.color = "#FFF";
     layers.effect.addChild(gameInfo.floor);
-//    黄钥匙
+    //    黄钥匙
     gameInfo.keyYellow = new LTextField();
     gameInfo.keyYellow.text = '黄钥匙： ' + globalData.playerInfo.key.yellow;
     gameInfo.keyYellow.x = 10;
@@ -170,7 +102,7 @@ function drawGameInfo() {
     gameInfo.keyBlue.size = 15;
     gameInfo.keyBlue.color = "#FFF";
     layers.effect.addChild(gameInfo.keyBlue);
-//    红钥匙
+    //    红钥匙
     gameInfo.keyRed = new LTextField();
     gameInfo.keyRed.text = '红钥匙： ' + globalData.playerInfo.key.red;
     gameInfo.keyRed.x = 10;

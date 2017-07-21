@@ -1,23 +1,5 @@
-/*
- * monsterType 为当前图片的序列号 用于mainjs的动画指定
- * monsterInfo 按图片区分怪物信息 并且给定属性
- * character 存储需要绘制的人物怪物等的信息
- * 其中 ****Type 对应的是素材中的位置
- * 所以对应雪碧图的为对象{x,y}
- * name 对应的是加载图片后的命名
- * */
-/*
- * key
- * x, y
- * 0,0 普通黄钥匙
- * 0,1 普通蓝钥匙
- * 0,2 普通红钥匙
- *
- * */
-/*
- *
- *
- * [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+/* 
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -28,8 +10,75 @@
  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
- *
  * */
+//图片path数组
+var imgData = [{
+    name: "map1", /*地图*/
+    path: "./images/map1.png"
+}, {
+    name: "map2", /*地图*/
+    path: "./images/map2.png"
+}, {
+    name: "prop", /*道具*/
+    path: "./images/prop.png"
+}, {
+    name: "upFloor", /*上楼梯*/
+    path: "./images/up_floor.png"
+}, {
+    name: "downFloor", /*下楼梯*/
+    path: "./images/down_floor.png"
+}, {
+    name: "door", /*门*/
+    path: "./images/door.png"
+}, {
+    name: "door_", /*栏杆*/
+    path: "./images/door_.png"
+},{
+    name: "shop_", /*商店不动的*/
+    path: "./images/shop.png"
+}, {
+    name: "agentia", /*药剂*/
+    path: "./images/agentia.png"
+}, {
+    name: "gem", /*宝石*/
+    path: "./images/gem.png"
+}, {
+    name: "article", /*系统物品*/
+    path: "./images/article.png"
+}, {
+    name: "equip", /*装备*/
+    path: "./images/equip.png"
+}, {
+    name: "key", /*钥匙*/
+    path: "./images/key.png"
+}, {
+    name: "hero", /*英雄*/
+    path: "./images/hero.png"
+}, {
+    name: "npc1", /*npc*/
+    path: "./images/npc1.png"
+}, {
+    name: "npc2", /*npc*/
+    path: "./images/npc2.png"
+}, {
+    name: "monster1", /*怪物1*/
+    path: "./images/monster1.png"
+}, {
+    name: "monster2", /*怪物2*/
+    path: "./images/monster2.png"
+}, {
+    name: "monster3", /*怪物3*/
+    path: "./images/monster3.png"
+}, {
+    name: "monster4", /*怪物4*/
+    path: "./images/monster4.png"
+}, {
+    name: "monster5", /*怪物5*/
+    path: "./images/monster5.png"
+}, {
+    name: "monster6", /*怪物6*/
+    path: "./images/monster6.png"
+}];
 var globalData = {
     mapCol: 11,
     mapRow: 11,
