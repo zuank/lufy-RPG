@@ -1,5 +1,6 @@
 /**
  * Created by Zuank on 2017/7/2.
+ * 0 为null
  * upFloor 上楼
  * downFloor 下楼
  * key 钥匙
