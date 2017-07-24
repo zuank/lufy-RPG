@@ -219,5 +219,17 @@ var configChara = {
     'monster23': {
         img: 'monster6',
         y: 3
+    },
+    'monster24': {
+        img: 'monster7',
+        y: 0
+    },
+    'monster25': {
+        img: 'monster7',
+        y: 1
+    },
+    'monster26': {
+        img: 'monster7',
+        y: 2
     }
 }
