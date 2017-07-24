@@ -5,6 +5,10 @@ var playerMove = function (x, y, status) {
         return;
     }
     if (moveInfo.type === 'goods') {
+        if (moveInfo.goodsType === 'gem' || moveInfo.goodsType === 'key' ||moveInfo.goodsType === 'agentia' ) {
+            getGoods(moveInfo, status);
+            return;
+        }
         switch (moveInfo.goodsType) {
             case 'upFloor':
                 globalData.floor++;
@@ -17,14 +21,6 @@ var playerMove = function (x, y, status) {
                 gameInfo.floor.text = '第' + globalData.floor + '层';
                 drawInit();
                 return;
-            /*不执行之后的运动操作*/
-            case 'key':
-                getKey(moveInfo.key);
-                // 从图层中移除对象 同事更新数据列表
-                removeGoodsAddChara('goods', moveInfo.position.y, moveInfo.position.x);
-                player.gotoAndPlay(status);
-                return;
-            /*不执行之后的运动操作*/
             case 'door':
                 var bol = canOper(moveInfo.key)
                 if (bol) {
@@ -54,23 +50,48 @@ function removeGoodsAddChara(type, y, x) {
     senceData[type][y][x] = 0
     layers.chara.getChildByName(globalData.floor + '_' + y + '_' + x).remove();
 }
-//拾取钥匙
-function getKey(type) {
-    switch (type) {
-        case 'key0':
-            globalData.playerInfo.key.yellow++;
-            gameInfo.keyYellow.text = '黄钥匙： ' + globalData.playerInfo.key.yellow;
-            return;
-        case 'key1':
-            globalData.playerInfo.key.blue++;
-            gameInfo.keyBlue.text = '蓝钥匙： ' + globalData.playerInfo.key.blue;
-            return;
-        case 'key2':
-            globalData.playerInfo.key.red++;
-            gameInfo.keyRed.text = '红钥匙： ' + globalData.playerInfo.key.red;
-            return;
+// 拾取物品
+function getGoods(info, status) {
+    switch (info.goodsType) {
+        case 'key':
+            switch (info.key) {
+                case 'key0':
+                    globalData.playerInfo.key.yellow++;
+                    gameInfo.keyYellow.text = '黄钥匙： ' + globalData.playerInfo.key.yellow;
+                    break;
+                case 'key1':
+                    globalData.playerInfo.key.blue++;
+                    gameInfo.keyBlue.text = '蓝钥匙： ' + globalData.playerInfo.key.blue;
+                    break;
+                case 'key2':
+                    globalData.playerInfo.key.red++;
+                    gameInfo.keyRed.text = '红钥匙： ' + globalData.playerInfo.key.red;
+                    break;
+            }
+            break;
+        case 'gem':
+            if (info.key === 'gem0') {
+                globalData.playerInfo.ATK+=10;
+                gameInfo.ATK.text = '攻击力： ' + globalData.playerInfo.ATK;
+            } else if (info.key === 'gem1') {
+                globalData.playerInfo.DEF+=10;
+                gameInfo.DEF.text = '防御力： ' + globalData.playerInfo.DEF;
+            }
+            break;
+        case 'agentia':
+            if (info.key === 'agentia0') {
+                globalData.playerInfo.HP+=10;
+                gameInfo.HP.text = '生命值： ' + globalData.playerInfo.HP;
+            } else if (info.key === 'agentia1') {
+                globalData.playerInfo.HP+=20;
+                gameInfo.HP.text = '生命值： ' + globalData.playerInfo.HP;
+            }
+            break;
     }
+    removeGoodsAddChara('goods', info.position.y, info.position.x);
+    player.gotoAndPlay(status);
 }
+
 //能否开门
 function canOper(type) {
     switch (type) {

@@ -83,11 +83,11 @@ var globalData = {
     mapCol: 11,
     mapRow: 11,
     size: 32,
-    floor: 3,
+    floor: 0,
     playerInfo: {
-        LifeValue: 1000,
-        Aggressivity: 20,
-        DefenseForce: 5,
+        HP: 1000,
+        ATK: 20,
+        DEF: 5,
         status: 'ArrowDown',
         key: {
             yellow: 1,
