@@ -71,6 +71,11 @@ var configGoods = {
         x: 2,
         y: 0
     },
+    'key3': {
+        img: 'key',
+        x: 0,
+        y: 1
+    },
     'agentia0':{
         img:'agentia',
         x: 0,
@@ -90,6 +95,11 @@ var configGoods = {
         img: 'equip',
         x: 0,
         y: 0
+    },
+    'equip1': {
+        img: 'equip',
+        x: 0,
+        y: 2
     },
     'shop0': {
         img:'shop_',
