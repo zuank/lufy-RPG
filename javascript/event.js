@@ -135,26 +135,12 @@ function canMove(x, y) {
         return false;
     }
     // 碰撞物品
-    if (senceData.goods[tempY][tempX] !== 0) {
-        type = getType(senceData.goods[tempY][tempX])
+    if (senceData.things[tempY][tempX] !== 0) {
+        type = getType(senceData.things[tempY][tempX])
         // 会将坐标和物品类型返回
         return {
-            type: 'goods',
-            goodsType: type,
-            key: senceData.goods[tempY][tempX],
-            position: {
-                x: tempX,
-                y: tempY
-            }
-        }
-    }
-    //碰撞人物
-    if (senceData.chara[tempY][tempX] !== 0) {
-        type = getType(senceData.chara[tempY][tempX])
-        return {
-            type: 'chara',
-            charaType: type,
-            key: senceData.chara[tempY][tempX],
+            type: type,
+            key: senceData.things[tempY][tempX],
             position: {
                 x: tempX,
                 y: tempY
