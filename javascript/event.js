@@ -5,36 +5,44 @@ var playerMove = function (x, y, status) {
         return;
     }
     if (moveInfo.type === 'goods') {
-        if (moveInfo.goodsType === 'gem' || moveInfo.goodsType === 'key' ||moveInfo.goodsType === 'agentia' ) {
-            getGoods(moveInfo, status);
-            return;
+        var deleteGoods = configGoods[moveInfo.key].handel()
+        if (deleteGoods === true) {
+            removeGoodsAddChara(moveInfo.position.y, moveInfo.position.x);
+            player.gotoAndPlay(status);
+            return
+        } else {
+            return
         }
-        switch (moveInfo.goodsType) {
-            case 'upFloor':
-                globalData.floor++;
-                gameInfo.floor.text = '第' + globalData.floor + '层';
-                drawInit();
-                return;
-            /*不执行之后的运动操作*/
-            case 'downFloor':
-                globalData.floor--;
-                gameInfo.floor.text = '第' + globalData.floor + '层';
-                drawInit();
-                return;
-            case 'door':
-                var bol = canOper(moveInfo.key)
-                if (bol) {
-                    removeGoodsAddChara('goods', moveInfo.position.y, moveInfo.position.x);
-                    player.gotoAndPlay(status);
-                }
-                return;
-        }
+        // if (moveInfo.goodsType === 'gem' || moveInfo.goodsType === 'key' ||moveInfo.goodsType === 'agentia' ) {
+        //     getGoods(moveInfo, status);
+        //     return;
+        // }
+        // switch (moveInfo.goodsType) {
+        //     case 'upFloor':
+        //         globalData.floor++;
+        //         gameInfo.floor.text = '第' + globalData.floor + '层';
+        //         drawInit();
+        //         return;
+        //     /*不执行之后的运动操作*/
+        //     case 'downFloor':
+        //         globalData.floor--;
+        //         gameInfo.floor.text = '第' + globalData.floor + '层';
+        //         drawInit();
+        //         return;
+        //     case 'door':
+        //         var bol = canOper(moveInfo.key)
+        //         if (bol) {
+        //             removeGoodsAddChara('goods', moveInfo.position.y, moveInfo.position.x);
+        //             player.gotoAndPlay(status);
+        //         }
+        //         return;
+        // }
     }
     if (moveInfo.type === 'chara') {
         switch (moveInfo.charaType) {
             case 'monster':
                 //  TODO      这边需要添加能不能kill
-                removeGoodsAddChara('chara', moveInfo.position.y, moveInfo.position.x);
+                removeGoodsAddChara(moveInfo.position.y, moveInfo.position.x);
                 player.gotoAndPlay(status);
                 return;
         }
@@ -46,8 +54,8 @@ var playerMove = function (x, y, status) {
     player.y = senceData.playerPosition.y * globalData.size;
 }
 //移除物品
-function removeGoodsAddChara(type, y, x) {
-    senceData[type][y][x] = 0
+function removeGoodsAddChara(y, x) {
+    senceData['things'][y][x] = 0
     layers.chara.getChildByName(globalData.floor + '_' + y + '_' + x).remove();
 }
 // 拾取物品
@@ -88,7 +96,7 @@ function getGoods(info, status) {
             }
             break;
     }
-    removeGoodsAddChara('goods', info.position.y, info.position.x);
+    removeGoodsAddChara(info.position.y, info.position.x);
     player.gotoAndPlay(status);
 }
 
