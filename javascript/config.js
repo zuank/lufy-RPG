@@ -13,7 +13,7 @@ var imgData = [{
   path: "./images/goods.png"
 }, {
   name: "hero",
-  /*物品*/
+  /*英雄*/
   path: "./images/hero.png"
 }];
 var configGoods = {
@@ -37,11 +37,19 @@ var configGoods = {
   },
   'goods_0_2': {
     x: 2,
-    y: 0
+    y: 0,
+    handel: function () {
+      globalData.playerInfo.ATK += 10;
+      gameInfo.ATK.text = '攻击力： ' + globalData.playerInfo.ATK;
+    }
   },
   'goods_0_3': {
     x: 3,
-    y: 0
+    y: 0,
+    handel: function () {
+      globalData.playerInfo.ATK += 20;
+      gameInfo.ATK.text = '攻击力： ' + globalData.playerInfo.ATK;
+    }
   },
   'goods_1_0': {
     x: 0,
@@ -88,11 +96,19 @@ var configGoods = {
   },
   'goods_2_0': {
     x: 0,
-    y: 2
+    y: 2,
+    handel: function () {
+      globalData.playerInfo.HP += 10;
+      gameInfo.HP.text = '生命值： ' + globalData.playerInfo.HP;
+    }
   },
   'goods_2_1': {
     x: 1,
-    y: 2
+    y: 2,
+    handel: function () {
+      globalData.playerInfo.HP += 20;
+      gameInfo.HP.text = '生命值： ' + globalData.playerInfo.HP;
+    }
   },
   'goods_2_2': {
     x: 2,

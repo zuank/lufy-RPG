@@ -90,7 +90,7 @@ globalData = {
     things: [
       ["goods_0_1", 0, 0, "monster0", "monster1", "monster0", 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      ["goods_2_0", 0, "monster10", "goods_3_0", 0, 0, "goods_2_0", "goods_3_0", "goods_2_0", 0, 0],
+      ["goods_2_0", 0, "monster10", "goods_1_0", 0, 0, "goods_2_0", "goods_3_0", "goods_2_0", 0, 0],
       ["goods_3_0", "monster10", "goods_0_2", 0, 0, 0, "goods_2_0", "goods_3_0", "goods_2_0", 0, 0],
       [0, "goods_1_0", 0, 0, 0, 0, 0, 0, "monster2", 0, 0],
       ["goods_3_0", "monster11", 0, 0, 0, "goods_1_0", "monster4", "monster0", "monster14", 0, 0],
