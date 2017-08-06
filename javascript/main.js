@@ -22,7 +22,7 @@ var layers = {
   talk: null,
 };
 // bitmap
-var bitMapData,mapImagesArray,bitMapAnimation,bitGoodsData,bitCharaData,charaImagesArray,bitCharaAnimation;
+var bitMapData, mapImagesArray, bitMapAnimation, bitGoodsData, bitCharaData, charaImagesArray, bitCharaAnimation;
 
 //当前场景信息
 var senceData = null;
@@ -163,7 +163,7 @@ function addMap() {
       // 2 星星墙
       // 3 岩浆墙
       if (index === 0 || index === 1) {
-        bitMapDataCell = new LBitmapData(imgList['map'], index * globalData.size, 3*globalData.size, globalData.size, globalData.size);
+        bitMapDataCell = new LBitmapData(imgList['map'], index * globalData.size, 3 * globalData.size, globalData.size, globalData.size);
         bitMap = new LBitmap(bitMapDataCell);
       } else if (index === 2 || index === 3) {
         bitMapData = new LBitmapData(imgList['map']);
@@ -191,7 +191,7 @@ function addThings() {
         if (configGoods[key]) {
           bitMapDataCell = new LBitmapData(imgList['goods'], configGoods[key].x * globalData.size, configGoods[key].y * globalData.size, globalData.size, globalData.size);
           bitMap = new LBitmap(bitMapDataCell);
-        } else if (configChara[key]){
+        } else if (configChara[key]) {
           bitMapData = new LBitmapData(imgList['chara']);
           mapImagesArray = LGlobal.divideCoordinate(bitMapData.width, bitMapData.height, 29, 4);
           bitMap = new LAnimationTimeline(bitMapData, mapImagesArray);

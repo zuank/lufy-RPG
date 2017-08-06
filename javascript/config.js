@@ -41,6 +41,7 @@ var configGoods = {
     handel: function () {
       globalData.playerInfo.ATK += 10;
       gameInfo.ATK.text = '攻击力： ' + globalData.playerInfo.ATK;
+      return true;
     }
   },
   'goods_0_3': {
@@ -49,6 +50,7 @@ var configGoods = {
     handel: function () {
       globalData.playerInfo.ATK += 20;
       gameInfo.ATK.text = '攻击力： ' + globalData.playerInfo.ATK;
+      return true;
     }
   },
   'goods_1_0': {
@@ -100,6 +102,7 @@ var configGoods = {
     handel: function () {
       globalData.playerInfo.HP += 10;
       gameInfo.HP.text = '生命值： ' + globalData.playerInfo.HP;
+      return true;
     }
   },
   'goods_2_1': {
@@ -108,6 +111,7 @@ var configGoods = {
     handel: function () {
       globalData.playerInfo.HP += 20;
       gameInfo.HP.text = '生命值： ' + globalData.playerInfo.HP;
+      return true;
     }
   },
   'goods_2_2': {
