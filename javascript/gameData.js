@@ -11,16 +11,6 @@
  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
  * */
-// function test (a, b) {
-//     const c = []
-//     for (var index = 0; index < a.length; index++) {
-//         c[index] = []
-//         for (var i = 0; i < a[index].length; i++) {
-//             c[index][i] = a[index][i] === 0 ? b[index][i] : a[index][i]
-//         }
-//     }
-//     return c
-// }
 var globalData;
 globalData = {
   mapCol: 11,
@@ -244,8 +234,8 @@ globalData = {
     ],
     things: [
       ["goods_4_3", "monster12", 0, "goods_0_3", 0, "goods_3_0", "monster3", "goods_5_0", 0, "goods_2_1", "goods_2_1"],
-      ["monster12", "goods_3_0", 0, "goods_0_2", 0, 0, "goods_3_0", "monster3", 0, 0, "goods_2_1"],
-      ["goods_3_0", "monster16", "goods_1_1", 0, "goods_1_1", "monster16", 0, "goods_3_0", 0, 0, 0],
+      ["monster12", "goods_3_0", 0, "goods_0_2", 0, 0, "goods_3_0", "monster3", 0, 'monster23', "goods_2_1"],
+      ["goods_3_0", "monster16", "goods_1_1", 0, "goods_1_1", "monster16", 0, "goods_3_0", 0, 0, 'monster23'],
       [0, 0, 0, "monster20", 0, 0, 0, 0, 0, "monster7", 0],
       [0, 0, 0, "goods_1_2", 0, 0, 0, 0, 0, "goods_1_0", 0],
       [0, 0, "monster5", 0, "goods_3_0", "goods_3_0", "goods_3_0", 0, "monster5", 0, 0],
