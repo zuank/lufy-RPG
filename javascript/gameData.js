@@ -16,7 +16,7 @@ globalData = {
   mapCol: 11,
   mapRow: 11,
   size: 32,
-  floor: 0, // 7
+  floor: 7, // 7
   playerInfo: {
     HP: 1000,
     ATK: 20,
@@ -266,11 +266,11 @@ globalData = {
     things: [
       ['goods_0_1', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 'monster16', 0, 'goods_1_1', 0, 'monster12', 0, 0, 0],
-      [0, 0, 'monster16', 'goods_0_3', 0, 0, 0, 'goods_0_2', 'monster12', 0, 0],
+      [0, 0, 'monster16', 'goods_0_3', 0, 'monster24', 0, 'goods_0_2', 'monster12', 0, 0],
       [0, 0, 0, 0, 0, 'goods_4_0', 0, 0, 0, 0, 0],
-      [0, 0, 'goods_1_1', 0, 'goods_4_0', 0, 'goods_4_0', 0, 'goods_1_1', 0, 0],
+      [0, 0, 'goods_1_1', 'monster24', 'goods_4_0', 0, 'goods_4_0', 'monster24', 'goods_1_1', 0, 0],
       [0, 0, 0, 0, 0, 'goods_4_0', 0, 0, 0, 0, 0],
-      [0, 0, 'goods_2_0', 'goods_0_2', 0, 0, 0, 'goods_0_3', 'goods_2_0', 0, 0],
+      [0, 0, 'goods_2_0', 'goods_0_2', 0, 'monster24', 0, 'goods_0_3', 'goods_2_0', 0, 0],
       [0, 0, 'goods_3_0', 'goods_2_0', 0, 'goods_1_1', 0, 'goods_2_0', 'goods_3_0', 0, 0],
       [0, 0, 0, 'goods_3_1', 'goods_3_1', 'goods_2_1', 'goods_3_1', 'goods_3_1', 0, 0, 0],
       [0, 0, 0, 0, 0, 'goods_1_2', 0, 0, 0, 0, 0],
