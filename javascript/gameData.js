@@ -16,11 +16,13 @@ globalData = {
   mapCol: 11,
   mapRow: 11,
   size: 32,
-  floor: 7, // 7
+  floor: 0, // 7
   playerInfo: {
     HP: 1000,
-    ATK: 20,
-    DEF: 5,
+    ATK: 10,
+    DEF: 10,
+    money: 0,
+    XP: 0,
     status: 'ArrowDown',
     key: {
       yellow: 1,

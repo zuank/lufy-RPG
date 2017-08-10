@@ -88,54 +88,70 @@ function drawGameInfo() {
   gameInfo.floor.size = 20;
   gameInfo.floor.color = "#FFF";
   layers.effect.addChild(gameInfo.floor);
+  //    英雄血量
+  gameInfo.HP = new LTextField();
+  gameInfo.HP.text = '生命值： ' + globalData.playerInfo.HP;
+  gameInfo.HP.x = 20;
+  gameInfo.HP.y = 35;
+  gameInfo.HP.size = 15;
+  gameInfo.HP.color = "#FFF";
+  layers.effect.addChild(gameInfo.HP);
   //    黄钥匙
   gameInfo.keyYellow = new LTextField();
   gameInfo.keyYellow.text = '黄钥匙： ' + globalData.playerInfo.key.yellow;
-  gameInfo.keyYellow.x = 10;
-  gameInfo.keyYellow.y = 25;
+  gameInfo.keyYellow.x = 20;
+  gameInfo.keyYellow.y = 50;
   gameInfo.keyYellow.size = 15;
   gameInfo.keyYellow.color = "#FFF";
   layers.effect.addChild(gameInfo.keyYellow);
   //    蓝钥匙
   gameInfo.keyBlue = new LTextField();
   gameInfo.keyBlue.text = '蓝钥匙： ' + globalData.playerInfo.key.blue;
-  gameInfo.keyBlue.x = 10;
-  gameInfo.keyBlue.y = 40;
+  gameInfo.keyBlue.x = 20;
+  gameInfo.keyBlue.y = 65;
   gameInfo.keyBlue.size = 15;
   gameInfo.keyBlue.color = "#FFF";
   layers.effect.addChild(gameInfo.keyBlue);
   //    红钥匙
   gameInfo.keyRed = new LTextField();
   gameInfo.keyRed.text = '红钥匙： ' + globalData.playerInfo.key.red;
-  gameInfo.keyRed.x = 10;
-  gameInfo.keyRed.y = 55;
+  gameInfo.keyRed.x = 20;
+  gameInfo.keyRed.y = 80;
   gameInfo.keyRed.size = 15;
   gameInfo.keyRed.color = "#FFF";
   layers.effect.addChild(gameInfo.keyRed);
-  //    英雄血量
-  gameInfo.HP = new LTextField();
-  gameInfo.HP.text = '生命值： ' + globalData.playerInfo.HP;
-  gameInfo.HP.x = 10;
-  gameInfo.HP.y = 70;
-  gameInfo.HP.size = 15;
-  gameInfo.HP.color = "#FFF";
-  layers.effect.addChild(gameInfo.HP);
   //    英雄攻击力
   gameInfo.ATK = new LTextField();
   gameInfo.ATK.text = '攻击力： ' + globalData.playerInfo.ATK;
-  gameInfo.ATK.x = 10;
-  gameInfo.ATK.y = 85;
+  gameInfo.ATK.x = 215;
+  gameInfo.ATK.y = 35;
   gameInfo.ATK.size = 15;
   gameInfo.ATK.color = "#FFF";
   layers.effect.addChild(gameInfo.ATK);
   //    英雄防御力
   gameInfo.DEF = new LTextField();
   gameInfo.DEF.text = '防御力： ' + globalData.playerInfo.DEF;
-  gameInfo.DEF.x = 10;
-  gameInfo.DEF.y = 100;
+  gameInfo.DEF.x = 215;
+  gameInfo.DEF.y = 50;
   gameInfo.DEF.size = 15;
   gameInfo.DEF.color = "#FFF";
   layers.effect.addChild(gameInfo.DEF);
+  //    英雄金钱
+  gameInfo.money = new LTextField();
+  gameInfo.money.text = '金钱： ' + globalData.playerInfo.money;
+  gameInfo.money.x = 215;
+  gameInfo.money.y = 65;
+  gameInfo.money.size = 15;
+  gameInfo.money.color = "#FFF";
+  layers.effect.addChild(gameInfo.money);
+  //    英雄经验
+  gameInfo.XP = new LTextField();
+  gameInfo.XP.text = '经验值： ' + globalData.playerInfo.XP;
+  gameInfo.XP.x = 215;
+  gameInfo.XP.y = 80;
+  gameInfo.XP.size = 15;
+  gameInfo.XP.color = "#FFF";
+  layers.effect.addChild(gameInfo.XP);
 }
 
 function drawInit() {
