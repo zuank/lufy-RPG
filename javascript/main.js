@@ -193,7 +193,7 @@ function addThings() {
           bitMap = new LBitmap(bitMapDataCell);
         } else if (configChara[key]) {
           bitMapData = new LBitmapData(imgList['chara']);
-          mapImagesArray = LGlobal.divideCoordinate(bitMapData.width, bitMapData.height, 30, 4);
+          mapImagesArray = LGlobal.divideCoordinate(bitMapData.width, bitMapData.height, 36, 4);
           bitMap = new LAnimationTimeline(bitMapData, mapImagesArray);
           bitMap.setLabel("Chara", configChara[key].y, 0, 1, true);
           bitMap.speed = 5;
