@@ -21,6 +21,8 @@ var layers = {
   effect: null,
   talk: null,
 };
+// 计时器
+var myTimer = null;
 // bitmap
 var bitMapData, mapImagesArray, bitMapAnimation, bitGoodsData, bitCharaData, charaImagesArray, bitCharaAnimation;
 
@@ -46,6 +48,25 @@ function main() {
   );
 }
 
+function drawMessage(message) {
+    layers.talk.removeAllChild();
+    myTimer && myTimer.destroy ();
+    var dialog = new LSprite();
+    dialog.graphics.drawRect(0, '#111111', [0, 0, 100, 20], true, '#dddddd');
+    dialog.x = (32 * 11 - 100) / 2;
+    dialog.y = 32 * 5;
+    var text = new LTextField();
+    text.text = message;
+    text.x = (100 - text.getWidth())/2
+    dialog.addChild(text);
+    layers.talk.addChild(dialog);
+    myTimer = new LTimer(800, 1);
+    myTimer.addEventListener(LTimerEvent.TIMER, function(){
+      layers.talk.removeAllChild();
+      myTimer.destroy ();
+    });
+    myTimer.start();
+}
 //游戏初始化
 function gameInit(result) {
   removeChild(loadingLayer);
@@ -253,12 +274,11 @@ function layerInit() {
   layers.back.y = 0;
   layers.mapview = new LSprite();
   layers.back.addChild(layers.mapview);
-  layers.talk = new LSprite();
-  layers.back.addChild(layers.talk);
   layers.chara = new LSprite();
   layers.back.addChild(layers.chara);
+  layers.talk = new LSprite();
+  layers.back.addChild(layers.talk);
   layers.effect = new LSprite();
-  layers.effect.x = 0
   layers.effect.y = 11 * globalData.size
   layers.back.addChild(layers.effect);
 }

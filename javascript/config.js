@@ -41,6 +41,7 @@ var configGoods = {
     handel: function () {
       globalData.playerInfo.ATK += 3;
       gameInfo.ATK.text = '攻击力： ' + globalData.playerInfo.ATK;
+      drawMessage('攻击力+3');
       return true;
     }
   },
@@ -50,6 +51,7 @@ var configGoods = {
     handel: function () {
       globalData.playerInfo.DEF += 3;
       gameInfo.DEF.text = '防御力： ' + globalData.playerInfo.DEF;
+      drawMessage('防御力+3');
       return true;
     }
   },
@@ -102,6 +104,7 @@ var configGoods = {
     handel: function () {
       globalData.playerInfo.HP += 200;
       gameInfo.HP.text = '生命值： ' + globalData.playerInfo.HP;
+      drawMessage('生命值+200');
       return true;
     }
   },
@@ -111,6 +114,7 @@ var configGoods = {
     handel: function () {
       globalData.playerInfo.HP += 500;
       gameInfo.HP.text = '生命值： ' + globalData.playerInfo.HP;
+      drawMessage('生命值+500');
       return true;
     }
   },
@@ -128,6 +132,7 @@ var configGoods = {
     handel: function () {
       globalData.playerInfo.key.yellow++;
       gameInfo.keyYellow.text = '黄钥匙： ' + globalData.playerInfo.key.yellow;
+      drawMessage('黄钥匙+1');
       return true;
     }
   },
@@ -137,6 +142,7 @@ var configGoods = {
     handel: function () {
       globalData.playerInfo.key.blue++;
       gameInfo.keyBlue.text = '蓝钥匙： ' + globalData.playerInfo.key.blue;
+      drawMessage('蓝钥匙+1');
       return true;
     }
   },
@@ -146,6 +152,7 @@ var configGoods = {
     handel: function () {
       globalData.playerInfo.key.red++;
       gameInfo.keyRed.text = '红钥匙： ' + globalData.playerInfo.key.red;
+      drawMessage('红钥匙+1');
       return true;
     }
   },
