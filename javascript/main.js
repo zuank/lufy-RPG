@@ -17,7 +17,7 @@ var loadingLayer;
 var layers = {
   back: null,
   mapview: null,
-  chara: null,
+  things: null,
   effect: null,
   talk: null,
 };
@@ -178,7 +178,7 @@ function drawGameInfo() {
 function drawInit() {
   senceData = globalData.data[globalData.floor];
   // 页面初始化
-  layers.chara.removeAllChild();
+  layers.things.removeAllChild();
   layers.mapview.removeAllChild();
   addMap();
   // addChara();
@@ -239,7 +239,7 @@ function addThings() {
         bitMap.x = j * globalData.size;
         bitMap.y = i * globalData.size;
         bitMap.name = globalData.floor + '_' + i + '_' + j
-        layers.chara.addChild(bitMap);
+        layers.things.addChild(bitMap);
       }
     }
   }
@@ -263,7 +263,7 @@ function addPlayer() {
   globalData.playerInfo.position = senceData.playerPosition;
   chara.x = senceData.playerPosition.x * globalData.size;
   chara.y = senceData.playerPosition.y * globalData.size;
-  layers.chara.addChild(chara);
+  layers.things.addChild(chara);
 }
 
 function layerInit() {
@@ -274,8 +274,8 @@ function layerInit() {
   layers.back.y = 0;
   layers.mapview = new LSprite();
   layers.back.addChild(layers.mapview);
-  layers.chara = new LSprite();
-  layers.back.addChild(layers.chara);
+  layers.things = new LSprite();
+  layers.back.addChild(layers.things);
   layers.talk = new LSprite();
   layers.back.addChild(layers.talk);
   layers.effect = new LSprite();

@@ -28,7 +28,7 @@ var playerMove = function (x, y, status) {
 //移除物品
 function removeGoodsAddChara(y, x) {
     senceData['things'][y][x] = 0
-    layers.chara.getChildByName(globalData.floor + '_' + y + '_' + x).remove();
+    layers.things.getChildByName(globalData.floor + '_' + y + '_' + x).remove();
 }
 //判断是否可以移动
 function canMove(x, y) {
