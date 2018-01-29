@@ -30,6 +30,7 @@ var configGoods = {
     x: 1,
     y: 0,
     handel: function () {
+      if (globalData.data.length - 1 === globalData.floor) return false
       globalData.floor++;
       gameInfo.floor.text = '第' + globalData.floor + '层';
       drawInit();

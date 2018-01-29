@@ -16,7 +16,7 @@ globalData = {
   mapCol: 11,
   mapRow: 11,
   size: 32,
-  floor: 0, // 7
+  floor: 7, // 7
   playerInfo: {
     HP: 1000,
     ATK: 10,
